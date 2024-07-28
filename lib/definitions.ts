@@ -3,7 +3,7 @@
 // For simplicity of teaching, we're manually defining these types.
 // However, these types are generated automatically if you're using an ORM such as Prisma.
 export type User = {
-    _id: string;
+    id: number;
     name: string;
     email: string;
     role: string;
@@ -12,5 +12,7 @@ export type User = {
   
   export type LoginResponseData = {
     token: string;
+    issuedAt: Date;
+    expirtionDate: Date;
     user: User;
   };

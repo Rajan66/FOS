@@ -3,8 +3,8 @@ import logo from "@/public/assets/logo.png";
 import Link from "next/link";
 import { navItems } from "./list/navItems";
 import NavItem from "./NavItem";
-// import { Button } from "../ui/button";
-// import MblNavbar from "./MblNavbar";
+import { Button } from "@/components/ui/button";
+import MblNavbar from "./MblNavbar";
 
 const Navbar = () => {
 
@@ -36,7 +36,7 @@ const Navbar = () => {
         </Link>
         {/* <nav className="flex gap-5 max-md:flex-wrap"> */}
         <div className="flex mmd:hidden justify-center items-center">
-          {/* <MblNavbar /> */}
+          <MblNavbar />
         </div>
       </div>
     </header>

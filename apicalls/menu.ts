@@ -3,7 +3,7 @@ import {
   GetRequest,
   PostRequest,
   PutRequest,
-} from "@/lib/axios/axios";
+} from "@/lib/axios/client/axios";
 //   restaurants/2302/menus/4
 export const createMenu = async (
   data: {

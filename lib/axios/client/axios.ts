@@ -16,3 +16,9 @@ export function GetRequest(url: string, data: any, config: any) {
   config.params = data;
   return axios.get(url, config);
 }
+
+export function GetFileRequest(url: string, data: any, config: any) {
+  config.params = data;
+  config.responseType = "blob";
+  return axios.get(url, config);
+}
