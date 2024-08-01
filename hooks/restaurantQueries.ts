@@ -1,4 +1,4 @@
-import { getAllRestaurants, getRestaurantDetail } from "@/apicalls/restaurants";
+import { getAllRestaurants, getRestaurantDetail } from "@/apicalls/restaurant";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export const useGetAllRestaurants = () => {
