@@ -15,7 +15,7 @@ const NavItem = ({ name, href }: NavItemProps) => {
     <Link
       href={href}
       className={cn(
-        "px-[10px] py-[30px] text-nav text-navbarText transition duration-150 opacity-100",
+        "px-[10px] py-[30px] text-nav text-black transition duration-150 opacity-100",
         {
           " opacity-100": pathname === href,
         }

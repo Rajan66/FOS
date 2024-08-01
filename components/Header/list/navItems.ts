@@ -4,16 +4,12 @@ export const navItems = [
     href: "/",
   },
   {
+    name: "Restaurants",
+    href: "/restaurants",
+  },
+  {
     name: "About Us",
     href: "/about",
-  },
-  {
-    name: "Car for Hire",
-    href: "/cars",
-  },
-  {
-    name: "Gallery",
-    href: "/gallery",
   },
   {
     name: "Contact Us",
