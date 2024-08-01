@@ -3,15 +3,16 @@ import Link from "next/link";
 
 import { footerLists } from "./list/footerLists";
 import { socialLinks } from "./list/socialLinks";
-import building from "@/public/assets/ph_building-office.png"
-
+import building from "@/public/assets/ph_building-office.png";
 
 const Footer = () => {
   return (
     <footer className="overflow-x-hidden mx-[20px] md:mx-[40px] 2xl:mx-[80px]">
       <div className="xl:flex gap-5 justify-between items-start mt-[72px] w-full max-md:mt-10 grid grid-cols-1 md:grid-cols-4 mmd:grid-cols-6">
         <div className="xl:flex xl:flex-col xl:w-[20%] grid mmd:col-span-2 col-span-2">
-          <h2 className="text-2xl font-normal leading-[28px] text-black">BiteBuddy</h2>
+          <h2 className="text-2xl font-normal leading-[28px] text-black">
+            BiteBuddy
+          </h2>
           <p className="mt-[19px] text-lg font-light leading-7 text-black ">
             Lorem ipsum dolor sit amet consectetur. Nibh rhoncus tincidunt in
             posuere morbi in ac fames et. Duis lacus scelerisque in massa
@@ -19,7 +20,11 @@ const Footer = () => {
           </p>
           <div className="flex gap-2.5 mt-11 max-md:mt-10">
             {socialLinks.map((item, index) => (
-              <Link key={index} href={item.link} className="bg-black w-[40px] h-[40px] flex justify-center items-center">
+              <Link
+                key={index}
+                href={item.link}
+                className="bg-black w-[40px] h-[40px] flex justify-center items-center"
+              >
                 <Image
                   src={item.src}
                   width={20}
@@ -35,10 +40,10 @@ const Footer = () => {
           <div className="flex flex-col mt-4 xl:mt-[26px] space-y-5">
             {footerLists.map((item, index) => (
               <Link
-              href={item.link}
-                className="transition duration-150 hover:underline text-base leading-[18px]"
+                href={item.link}
+                className="transition duration-150 hover:text-yellow-400 text-base leading-[18px]"
+                key={index}
               >
-              key={index}
                 {item.name}
               </Link>
             ))}
@@ -71,7 +76,7 @@ const Footer = () => {
                 />
               </div>
               <p className="flex-auto my-auto font-normal text-base text-pretty">
-                48 Main St, Pakenham VIC <br className="block 2xl:hidden" />3810, Australia
+                Mhepi, Kathmandu <br className="block 2xl:hidden" />
               </p>
             </div>
             <div className="flex gap-5 mt-8">
@@ -85,9 +90,7 @@ const Footer = () => {
               </div>
               <div className="flex-auto my-auto font-normal text-base">
                 <p>Contact number:</p>
-                <span className="text-xl font-bold">
-                  (12) 1234 5678
-                </span>
+                <span className="text-xl font-bold">(977) 9810350199</span>
               </div>
             </div>
             <div className="flex gap-5 mt-8">
@@ -111,7 +114,9 @@ const Footer = () => {
       </div>
       <hr className="shrink-0 mt-14 max-w-full h-px border border-solid bg-neutral-200 border-neutral-200 max-md:mt-10" />
       <div className="flex flex-col items-center mmd:flex-row gap-2 md:gap-5 justify-between mt-3 md:mt-6 text-sm text-zinc-600 pb-4">
-        <p className="text-center">© Copyright 2010-2023 . All Rights Reserved.</p>
+        <p className="text-center">
+          © Copyright 2024 . All Rights Reserved.
+        </p>
         <div className="flex flex-col items-center sm:flex-row gap-2 md:gap-5 justify-between">
           <nav>
             <a href="#privacy">Privacy policy</a> |{" "}
