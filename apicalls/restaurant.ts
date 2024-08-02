@@ -22,11 +22,11 @@ export const createRestaurant = async (data: any, token: string) => {
   }
 };
 
-export const getAllRestaurants = async () => {
+export const getAllRestaurants = async (pageParam: number | 1) => {
   try {
     const response = await GetRequest(
       `/api/restaurants`,
-      {},
+      { page: pageParam },
       {
         headers: {},
       }
@@ -75,9 +75,16 @@ export const updateRestaurant = async (
   }
 };
 
-export const deleteRestaurant = async (id: number) => {
+export const deleteRestaurant = async (data: {
+  id: number;
+  token: string | undefined;
+}) => {
   try {
-    const response = await DeleteRequest(`/api/restaurants/${id}`, {});
+    const response = await DeleteRequest(`/api/restaurants/${data.id}`, {
+      headers: {
+        Authorization: `Bearer ${data.token}`,
+      },
+    });
     return response.data;
   } catch (error: any) {
     throw new Error(error?.message);

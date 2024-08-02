@@ -13,13 +13,14 @@ const Sidebar = async () => {
   const userRole = session?.user?.role;
 
   return (
-    <aside className="custom-scrollbar hidden py-10 fixed left-0 top-0 h-screen overflow-y-auto w-[250px] bg-zinc-200 text-background lg:flex flex-col items-center gap-y-14 border-r border-r-secondary">
-      <Link href={"/"}>
-        <Image
+    <aside className="custom-scrollbar hidden py-10 fixed left-0 top-0 h-screen overflow-y-auto w-[250px] bg-gray-100 text-background lg:flex flex-col items-start gap-y-14 border-r border-r-secondary">
+      <Link href={"/"} className="px-8">
+      <Image
           src={logo}
-          width={160}
-          height={160}
-          alt="Right Choice Driving School Logo"
+          width={200}
+          height={200}
+          alt="BiteBuddy Logo"
+          className="my-auto w-[80px]"
         />
       </Link>
       <div className="w-full flex flex-col gap-y-5 flex-grow">
@@ -36,7 +37,7 @@ const Sidebar = async () => {
           await signOut({ redirectTo: "/" });
         }}
       >
-        <Button className="font-bold hidden gap-1 md:flex md:justify-start md:items-center ">
+        <Button className="font-bold hidden gap-1 md:flex md:justify-start md:items-center bg-gray-100 hover:bg-gray-100">
           <LogOut className="size-6" strokeWidth={3} />
           &nbsp; <span className="text-lg">Logout</span>
         </Button>

@@ -1,8 +1,10 @@
 type User = {
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   contact: number;
+  role: string;
 };
 
 type Restaurant = {
@@ -47,6 +49,19 @@ type OrderItem = {
   price: number;
   totalPrice: number;
   notes: string;
+};
+
+type UserDetails = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  email_verified_at: null | string;
+  contact: null | string;
+  role: string;
+  slug: string;
+  created_at: string;
+  updated_at: string;
 };
 
 type PaginatedUsersData = {

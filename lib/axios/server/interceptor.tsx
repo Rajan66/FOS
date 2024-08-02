@@ -2,7 +2,7 @@ import axios from "axios";
 import promise from "promise";
 
 var axiosInstance = axios.create({
-  baseURL: process.env.APP_URL,
+  baseURL: process.env.AUTH_URL,
   withCredentials: false,
 });
 

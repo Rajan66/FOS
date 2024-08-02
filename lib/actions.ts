@@ -14,7 +14,6 @@ export async function authenticate(formData: TLogin) {
         case "CredentialsSignin":
           return "Invalid credentials.";
         default:
-          console.log(error)
           return "Something went wrong.";
       }
     }
