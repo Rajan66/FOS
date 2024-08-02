@@ -37,7 +37,7 @@ const Sidebar = async () => {
           await signOut({ redirectTo: "/" });
         }}
       >
-        <Button className="font-bold hidden gap-1 md:flex md:justify-start md:items-center bg-secondary">
+        <Button className="font-bold hidden gap-1 md:flex md:justify-start md:items-center bg-gray-100 hover:bg-gray-100">
           <LogOut className="size-6" strokeWidth={3} />
           &nbsp; <span className="text-lg">Logout</span>
         </Button>
