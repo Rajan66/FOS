@@ -45,7 +45,7 @@ const Pagination: React.FC<PaginationProps> = ({
             variant={"outline"}
             onClick={() => onPageChange(1)}
             className={cn("", {
-              "border hover:border-primary hover:bg-zinc-300":
+              "border hover:border-secondary hover:bg-zinc-100":
                 currentPage === 1,
             })}
           >
@@ -59,8 +59,8 @@ const Pagination: React.FC<PaginationProps> = ({
           variant={"outline"}
           key={page}
           onClick={() => onPageChange(page)}
-          className={cn("border hover:border-primary hover:bg-zinc-300", {
-            "border border-primary bg-zinc-300": currentPage === page,
+          className={cn("border hover:border-secondary hover:bg-zinc-200", {
+            "border border-secondary  bg-zinc-100": currentPage === page,
           })}
         >
           {page}

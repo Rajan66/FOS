@@ -28,9 +28,7 @@ const RestaurantsTable = () => {
   const session = useSession();
   const [page, setPage] = useState<number>(1);
 
-  const { data: restaurantData, isPending } = useGetAllRestaurants(
-    page
-  );
+  const { data: restaurantData, isPending } = useGetAllRestaurants(page);
 
   const { mutate, isPending: Deleting } = useMutation({
     mutationFn: deleteRestaurant,
@@ -207,7 +205,10 @@ const RestaurantsTable = () => {
       )}
 
       <div className="mt-5 w-full flex items-center gap-x-2 justify-end p-4 place-self-end justify-self-end">
-        <Button onClick={prevPage} disabled={page === 1}>
+        <Button
+          onClick={prevPage}
+          disabled={page === 1}
+        >
           Prev
         </Button>
         <Pagination
@@ -216,7 +217,10 @@ const RestaurantsTable = () => {
           onPageChange={(pg) => setPage(pg)}
           pending={isPending}
         />
-        <Button onClick={nextPage} disabled={page === restaurantData?.page}>
+        <Button
+          onClick={nextPage}
+          disabled={page === restaurantData?.page}
+        >
           Next
         </Button>
       </div>

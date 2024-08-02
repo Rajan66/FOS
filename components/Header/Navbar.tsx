@@ -30,7 +30,7 @@ const Navbar = () => {
             href="/login"
             className="hidden mmd:flex justify-center items-center"
           >
-            <Button className="px-5 py-2.5 my-auto text-base  h-[45px] font-medium text-white uppercase bg-red-500 border-r-0 rounded-sm">
+            <Button className="px-5 py-2.5 my-auto text-base  h-[45px] font-medium text-white uppercase bg-primary border-r-0 rounded-sm">
               Login
             </Button>
           </Link>
@@ -38,7 +38,7 @@ const Navbar = () => {
             href="/signup"
             className="hidden mmd:flex justify-center items-center"
           >
-            <Button className="px-5 py-2.5 my-auto text-base h-[45px] font-medium text-white uppercase bg-yellow-400 border-r-0 rounded-sm">
+            <Button className="px-5 py-2.5 my-auto text-base h-[45px] font-medium text-white uppercase bg-secondary border-r-0 rounded-sm">
               Signup
             </Button>
           </Link>
