@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useGetAllUsers } from "@/hooks/usersQueries";
+import { useGetAllRestaurants } from "@/hooks/restaurantsQueries";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Edit, Loader2, Trash, Eye } from "lucide-react";
@@ -17,27 +17,26 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteUser } from "@/apicalls/users";
+import { deleteRestaurant } from "@/apicalls/restaurant";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Pagination from "@/components/Pagination";
 
-const UsersTable = () => {
+const RestaurantsTable = () => {
   const queryClient = useQueryClient();
   const session = useSession();
   const [page, setPage] = useState<number>(1);
 
-  const { data: userData, isPending } = useGetAllUsers(
-    page,
-    session?.data?.user?.access_token
+  const { data: restaurantData, isPending } = useGetAllRestaurants(
+    page
   );
 
   const { mutate, isPending: Deleting } = useMutation({
-    mutationFn: deleteUser,
+    mutationFn: deleteRestaurant,
     onSuccess() {
-      toast.success("User Deleted Successfully");
-      queryClient.invalidateQueries({ queryKey: ["users", page] });
+      toast.success("Restaurant Deleted Successfully");
+      queryClient.invalidateQueries({ queryKey: ["restaurants", page] });
     },
     onError() {
       toast.error("Something went wrong, Try again Later");
@@ -52,7 +51,7 @@ const UsersTable = () => {
   const prevPage = () => setPage(page! - 1);
   const nextPage = () => setPage(page! + 1);
   const pagesArray = Array.from(
-    { length: userData?.page ?? 1 }, // page should be last_page
+    { length: restaurantData?.page ?? 1 }, // page should be last_page
     (_, index) => index + 1
   );
 
@@ -62,7 +61,7 @@ const UsersTable = () => {
         <table className="min-w-[700px] relative w-full text-left">
           <thead className="border-b bg-gray-50 uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-            <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Id
               </th>
               <th scope="col" className="px-6 py-3">
@@ -85,14 +84,8 @@ const UsersTable = () => {
           </thead>
 
           <tbody className="w-full opacity-80">
-            {userData?.content?.map(
-              ({
-                id,
-                name,
-                email,
-                contact,
-                since,
-              }: any) => (
+            {restaurantData?.content?.map(
+              ({ id, name, email, contact, since }: any) => (
                 <tr
                   key={id}
                   className={cn(
@@ -133,7 +126,7 @@ const UsersTable = () => {
                     scope="row"
                     className="flex justify-end whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                   >
-                    <Link href={`/dashboard/vehicles/view_vehicle/${id}`}>
+                    <Link href={`/dashboard/restaurants/view_restaurant/${id}`}>
                       <Button
                         variant={"secondary"}
                         size={"icon"}
@@ -142,7 +135,7 @@ const UsersTable = () => {
                         <Eye className="size-5" />
                       </Button>
                     </Link>
-                    <Link href={`/dashboard/vehicles/edit_vehicle/${id}`}>
+                    <Link href={`/dashboard/restaurants/edit_restaurant/${id}`}>
                       <Button
                         variant={"secondary"}
                         size={"icon"}
@@ -201,15 +194,15 @@ const UsersTable = () => {
         </div>
       )}
 
-      {!userData && !isPending && (
+      {!restaurantData && !isPending && (
         <h3 className="w-full text-destructive font-bold text-center py-4">
           Something went wrong.
         </h3>
       )}
 
-      {userData?.content?.length === 0 && (
+      {restaurantData?.content?.length === 0 && (
         <h3 className="w-full text-destructive font-bold text-center py-4">
-          Currently, no vehicles found.
+          Currently, no restaurants found.
         </h3>
       )}
 
@@ -223,7 +216,7 @@ const UsersTable = () => {
           onPageChange={(pg) => setPage(pg)}
           pending={isPending}
         />
-        <Button onClick={nextPage} disabled={page === userData?.page}>
+        <Button onClick={nextPage} disabled={page === restaurantData?.page}>
           Next
         </Button>
       </div>
@@ -231,4 +224,4 @@ const UsersTable = () => {
   );
 };
 
-export default UsersTable;
+export default RestaurantsTable;

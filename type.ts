@@ -3,6 +3,7 @@ type User = {
   name: string;
   email: string;
   contact: number;
+  role: string;
 };
 
 type Restaurant = {
@@ -55,7 +56,7 @@ type UserDetails = {
   lastname: string;
   email: string;
   email_verified_at: null | string;
-  contact_info: null | string;
+  contact: null | string;
   role: string;
   slug: string;
   created_at: string;
