@@ -49,6 +49,19 @@ type OrderItem = {
   notes: string;
 };
 
+type UserDetails = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  email_verified_at: null | string;
+  contact_info: null | string;
+  role: string;
+  slug: string;
+  created_at: string;
+  updated_at: string;
+};
+
 type PaginatedUsersData = {
   totalPages: number;
   totalElements: number;

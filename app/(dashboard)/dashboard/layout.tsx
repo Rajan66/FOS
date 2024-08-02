@@ -9,18 +9,18 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AdminRoute>
+    // <AdminRoute>
     <section className="flex overflow-x-hidden">
       <Sidebar />
       <div className="w-full flex flex-col gap-y-6 xvsm:gap-y-11">
         <TopBar />
         <div className="mx-[1rem] lg:ml-[19rem]">
           {/* <BreadCrumbs /> */}
-          hello dahsboard
+          
           {children}
         </div>
       </div>
     </section>
-    </AdminRoute>
+    // </AdminRoute>
   );
 }
