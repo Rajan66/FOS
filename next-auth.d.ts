@@ -1,7 +1,7 @@
 import { DefaultSession } from "next-auth";
 import { JWT, Session, User } from "next-auth/next";
 
-type Role = Admin | Instructor | Learner;
+type Role = Admin | Restaurant | User;
 
 declare module "next-auth" {
   interface Session {

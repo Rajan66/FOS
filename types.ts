@@ -1,6 +1,7 @@
 type User = {
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   contact: number;
   role: string;

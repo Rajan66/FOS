@@ -4,7 +4,8 @@
 // However, these types are generated automatically if you're using an ORM such as Prisma.
 export type User = {
     id: number;
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     role: string;
     // slug: string;

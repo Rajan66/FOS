@@ -6,6 +6,9 @@ export const authConfig = {
     signIn: "/login",
   },
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      return `${process.env.NEXT_PUBLIC_AUTH_REDIRECT_URL}`;
+    },
     async jwt({ token, user, account }) {
       if (user) {
         if (account?.provider === "google") {
@@ -20,7 +23,7 @@ export const authConfig = {
 
     async session({ session, token }: { session: Session; token: any }) {
       session.user = token.user;
-      return session; 
+      return session;
     },
   },
   session: { strategy: "jwt" },

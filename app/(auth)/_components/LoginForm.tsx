@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Link from "next/link";
@@ -20,7 +20,6 @@ import { Input } from "@/components/ui/input";
 const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const {
     register,
@@ -30,15 +29,16 @@ const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
+
   const onSubmit = async (data: TLogin) => {
     setLoading(true);
+    console.log(data)
     try {
       const res = (await authenticate(data)) as any;
       console.log(res)
       if (res === process.env.NEXT_PUBLIC_AUTH_REDIRECT_URL) {
         toast.success("Login Successfull");
-        console.log("logged in")
-        router.push('/dashboard/vehicles')
+        // nextjs pushes to '/' automaticallly
       } else {
         setErrorMsg(res);
       }
