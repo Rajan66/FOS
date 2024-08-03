@@ -15,14 +15,17 @@ const NavItem = ({ name, href }: NavItemProps) => {
     <Link
       href={href}
       className={cn(
-        "px-[10px] py-[30px] text-nav text-black transition duration-150 opacity-100",
+        "px-[10px] py-[30px] text-nav text-black transition duration-150 opacity-80 hover:text-red-600",
         {
-          " opacity-100": pathname === href,
+          "text-red-600 opacity-100": pathname === href,
         }
       )}
     >
-      {name}
-    </Link>
+      <div className="flex flex-col">
+        {name}
+        <span className={cn("hidden", { "block border-t-2 border-red-600": pathname === href })}></span>
+      </div>
+    </Link >
   );
 };
 
