@@ -7,7 +7,6 @@ import {
 
 export const getAllUsers = async (
   pageParam = 1,
-
   token: string | undefined
 ) => {
   try {

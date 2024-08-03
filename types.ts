@@ -8,7 +8,7 @@ type User = {
 };
 
 type Restaurant = {
-  id: number;
+  restaurantId: number;
   name: string;
   email: string;
   contact: number;
@@ -22,7 +22,7 @@ type Menu = {
 };
 
 type Food = {
-  id: number;
+  foodId: number;
   menuId: number;
   name: string;
   category: string;
@@ -53,8 +53,8 @@ type OrderItem = {
 
 type UserDetails = {
   id: number;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   email_verified_at: null | string;
   contact: null | string;
@@ -138,4 +138,3 @@ type PaginatedOrdersData = {
   //   sort
   //   pageable
 };
-

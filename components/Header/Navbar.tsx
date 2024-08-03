@@ -8,12 +8,11 @@ import NavItem from "./NavItem";
 import { Button } from "@/components/ui/button";
 import MblNavbar from "./MblNavbar";
 import { useSession } from "next-auth/react";
+import LogoutBtn from "../LogoutBtn";
 
 const Navbar = () => {
   const { data: session } = useSession();
   const userRole = session?.user?.role;
-  console.log(userRole)
-  console.log(session)
   return (
     <header className="flex gap-5 justify-between bg-white mx-[20px] md:mx-[40px] 2xl:mx-[80px] my-2 max-md:flex-wrap">
       <Link href={"/"} className="flex flex-col justify-center items-center ">
@@ -54,7 +53,7 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            {userRole === 'admin' || userRole === 'restaurant' ? (
+            {userRole === 'ADMIN' || userRole === 'RESTAURANT' ? (
               <Link
                 href="/dashboard"
                 className="hidden mmd:flex justify-center items-center"
@@ -64,14 +63,9 @@ const Navbar = () => {
                 </Button>
               </Link>
             ) : (
-              <Link
-                href="/profile"
-                className="hidden mmd:flex justify-center items-center"
-              >
-                <Button className="px-5 py-2.5 my-auto text-base h-[45px] font-medium text-white uppercase border-r-0 rounded-sm">
-                  Logout
-                </Button>
-              </Link>
+              <div className="hidden mmd:flex justify-center items-center">
+                <LogoutBtn />
+              </div>
             )}
           </>
         )}

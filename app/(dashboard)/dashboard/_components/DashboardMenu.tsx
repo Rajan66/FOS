@@ -6,6 +6,7 @@ import logo from "@/public/assets/logo.png";
 import { sidebarLinks } from "./list/sidebarLinks";
 import { auth, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import LogoutBtn from "@/components/LogoutBtn";
 
 const DashboardMenu = async () => {
   const session = await auth();
@@ -32,18 +33,7 @@ const DashboardMenu = async () => {
             <MblSidebarItem key={index} link={item.link} name={item.name} />
           ))}
         </div>
-        <form
-          className="w-full px-4"
-          action={async () => {
-            "use server";
-            await signOut({ redirectTo: "/" });
-          }}
-        >
-          <Button className="flex justify-start items-center w-full px-8 py-10 font-bold">
-            <LogOut className="size-5" strokeWidth={3} />
-            &nbsp; Logout
-          </Button>
-        </form>
+        <LogoutBtn />
       </SheetContent>
       <SheetFooter>
 

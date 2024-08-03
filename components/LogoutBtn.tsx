@@ -4,6 +4,7 @@ import { LogOut } from "lucide-react";
 import { useSession } from "next-auth/react";
 import React from "react";
 import { logoutUser } from "@/lib/actions";
+import { Button } from "@/components/ui/button";
 
 const LogoutBtn = () => {
   const session = useSession();
@@ -18,13 +19,11 @@ const LogoutBtn = () => {
 
   if (session?.data?.user) {
     return (
-      <form className="w-full" onSubmit={handleSubmit}>
-        <button
-          type="submit"
-          className="w-full pr-0 pl-[0.19rem] flex items-center gap-x-2"
-        >
-          <LogOut className="size-4" /> Logout
-        </button>
+      <form className="" onSubmit={handleSubmit}>
+        <Button className="flex justify-start items-center font-bold text-lg">
+          <LogOut className="size-6" strokeWidth={3} />
+          &nbsp; Logout
+        </Button>
       </form>
     );
   }

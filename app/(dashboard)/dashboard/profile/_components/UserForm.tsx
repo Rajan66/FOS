@@ -28,8 +28,8 @@ const UserForm = ({ id, token }: Props) => {
   } = useForm<TUser>({
     resolver: zodResolver(userSchema),
     defaultValues: {
-      firstname: data?.firstname,
-      lastname: data?.lastname,
+      firstName: data?.firstName,
+      lastName: data?.lastName,
       email: data?.email,
       contact: data?.contact?.toString(),
     },
@@ -37,8 +37,8 @@ const UserForm = ({ id, token }: Props) => {
 
   useEffect(() => {
     if (data) {
-      setValue("firstname", data?.firstname);
-      setValue("lastname", data?.lastname);
+      setValue("firstName", data?.firstName);
+      setValue("lastName", data?.lastName);
       setValue("email", data?.email);
       setValue("contact", data?.contact?.toString());
     }
@@ -75,21 +75,21 @@ const UserForm = ({ id, token }: Props) => {
       className="flex flex-col gap-y-8 py-10 px-5 vsm:px-14 rounded-lg border border-input shadow"
     >
       <InputBox<TUser>
-        name="firstname"
-        id="firstname"
+        name="firstName"
+        id="firstName"
         placeholder="Enter First Name..."
         register={register}
-        error={(errors && errors?.firstname?.message?.toString()) || ""}
+        error={(errors && errors?.firstName?.message?.toString()) || ""}
         desc="enter the first name."
         label="First Name"
       />
 
       <InputBox<TUser>
-        name="lastname"
-        id="lastname"
+        name="lastName"
+        id="lastName"
         placeholder="Enter Last Name..."
         register={register}
-        error={(errors && errors?.lastname?.message?.toString()) || ""}
+        error={(errors && errors?.lastName?.message?.toString()) || ""}
         desc="enter the last name."
         label="Last Name"
       />

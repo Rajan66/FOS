@@ -3,10 +3,11 @@
 import { AuthError } from "next-auth";
 import { signIn, signOut } from "@/auth";
 import { TLogin } from "@/schemas/authSchema";
+import { redirect } from "next/dist/server/api-utils";
 
 export async function authenticate(formData: TLogin) {
   try {
-    const data = await signIn("credentials", { ...formData });
+    const data = await signIn("credentials", { ...formData, redirect: false });
     return data;
   } catch (error) {
     if (error instanceof AuthError) {
