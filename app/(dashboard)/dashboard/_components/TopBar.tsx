@@ -14,7 +14,7 @@ const TopBar = async () => {
 
       <div className="flex items-center gap-x-5">
         <div className="size-[40px] flex items-center justify-center rounded-full bg-gray-100  text-foreground text-lg font-semibold">
-          {`${session?.user?.name?.charAt(0) || `R`}`} 
+          {session?.user?.firstName?.charAt(0)}
         </div>
       </div>
     </div>

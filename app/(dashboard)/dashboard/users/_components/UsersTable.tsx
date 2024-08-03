@@ -52,7 +52,7 @@ const UsersTable = () => {
   const prevPage = () => setPage(page! - 1);
   const nextPage = () => setPage(page! + 1);
   const pagesArray = Array.from(
-    { length: userData?.page ?? 1 }, // page should be last_page
+    { length: userData?.totalPages ?? 1 }, // page should be last_page
     (_, index) => index + 1
   );
 
@@ -62,7 +62,7 @@ const UsersTable = () => {
         <table className="min-w-[700px] relative w-full text-left">
           <thead className="border-b bg-gray-50 uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-            <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Id
               </th>
               <th scope="col" className="px-6 py-3">
@@ -75,7 +75,7 @@ const UsersTable = () => {
                 Contact
               </th>
               <th scope="col" className="px-6 py-3">
-                Since
+                Role
               </th>
 
               <th scope="col" className="pl-6 py-3 pr-8 text-end">
@@ -88,10 +88,11 @@ const UsersTable = () => {
             {userData?.content?.map(
               ({
                 id,
-                name,
+                firstName,
+                lastName,
                 email,
                 contact,
-                since,
+                role,
               }: any) => (
                 <tr
                   key={id}
@@ -109,7 +110,7 @@ const UsersTable = () => {
                     scope="row"
                     className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                   >
-                    {name}
+                    {firstName} {lastName}
                   </td>
                   <td
                     scope="row"
@@ -121,19 +122,19 @@ const UsersTable = () => {
                     scope="row"
                     className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                   >
-                    {contact}
+                    {contact ? contact : '-'}
                   </td>
                   <td
                     scope="row"
                     className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                   >
-                    {since}
+                    {role}
                   </td>
                   <td
                     scope="row"
-                    className="flex justify-end whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
+                    className="flex justify-end whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white gap-2"
                   >
-                    <Link href={`/dashboard/vehicles/view_vehicle/${id}`}>
+                    <Link href={`/dashboard/users/users_details/${id}`}>
                       <Button
                         variant={"secondary"}
                         size={"icon"}
@@ -142,18 +143,9 @@ const UsersTable = () => {
                         <Eye className="size-5" />
                       </Button>
                     </Link>
-                    <Link href={`/dashboard/vehicles/edit_vehicle/${id}`}>
-                      <Button
-                        variant={"secondary"}
-                        size={"icon"}
-                        className="text-background"
-                      >
-                        <Edit className="size-5" />
-                      </Button>
-                    </Link>
                     <AlertDialog>
                       <AlertDialogTrigger>
-                        <Button size={"icon"}>
+                        <Button size={"icon"} className="bg-destructive text-white hover:bg-destructive/80">
                           <Trash className="size-5" />
                         </Button>
                       </AlertDialogTrigger>
@@ -209,7 +201,7 @@ const UsersTable = () => {
 
       {userData?.content?.length === 0 && (
         <h3 className="w-full text-destructive font-bold text-center py-4">
-          Currently, no vehicles found.
+          Currently, no users found.
         </h3>
       )}
 
@@ -223,7 +215,7 @@ const UsersTable = () => {
           onPageChange={(pg) => setPage(pg)}
           pending={isPending}
         />
-        <Button onClick={nextPage} disabled={page === userData?.page}>
+        <Button onClick={nextPage} disabled={page === userData?.totalPages}>
           Next
         </Button>
       </div>

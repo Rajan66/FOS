@@ -5,11 +5,16 @@ import {
   PutRequest,
 } from "@/lib/axios/client/axios";
 
-export const getAllUsers = async (
-  pageParam = 1,
+export const registerUser = async (data: any) => {
+  try {
+    const response = await PostRequest("/api/auth/register", data, {});
+    return response;
+  } catch (error: any) {
+    return error;
+  }
+};
 
-  token: string | undefined
-) => {
+export const getAllUsers = async (pageParam = 1, token: string | undefined) => {
   try {
     const response = await GetRequest(
       `/api/users`,

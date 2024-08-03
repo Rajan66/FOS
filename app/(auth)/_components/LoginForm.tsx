@@ -37,7 +37,9 @@ const LoginForm = () => {
       const res = (await authenticate(data)) as any;
       console.log(res)
       if (res === process.env.NEXT_PUBLIC_AUTH_REDIRECT_URL) {
-        toast.success("Login Successfull");
+        toast.success("Login Successful");
+        window.location.reload();
+        window.location.href = '/'
         // nextjs pushes to '/' automaticallly
       } else {
         setErrorMsg(res);

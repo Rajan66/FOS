@@ -29,13 +29,13 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
           .object({ email: z.string().email(), password: z.string() })
           .safeParse(credentials);
 
-        console.log(parsedCredentials)
+        console.log(parsedCredentials);
 
         if (!parsedCredentials.success) throw new Error("Invalid Credentials");
         const { email, password } = parsedCredentials.data;
         // console.log(email || "abc")
         const res = await loginWithEmailAndPassword(email, password);
-        
+
         if (!res) {
           throw new Error("Invaid Credentials");
         }
@@ -43,8 +43,8 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
         const UserData = {
           id: res.user.id.toString(),
           access_token: res.token,
-          lastName: `${res.user.firstName}`,
-          firstName: `${res.user.lastName}`,
+          firstName: `${res.user.firstName}`,
+          lastName: `${res.user.lastName}`,
           email: res.user.email,
           role: res.user.role,
         };

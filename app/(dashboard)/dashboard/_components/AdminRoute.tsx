@@ -12,7 +12,7 @@ const AdminRoute = ({ children }: any) => {
     useEffect(() => {
         if (status === 'loading') return;
 
-        if (!session || session.user.role !== 'Admin') {
+        if (!session || session.user.role !== 'ADMIN') {
 
             router.push('/');
         }
@@ -21,7 +21,7 @@ const AdminRoute = ({ children }: any) => {
     if (status === 'loading') {
         return <span className='text-blue-400'><Loading /></span>;
     }
-    if (!session || session.user.role !== 'Admin') {
+    if (!session || session.user.role !== 'ADMIN') {
         return null;
     }
 

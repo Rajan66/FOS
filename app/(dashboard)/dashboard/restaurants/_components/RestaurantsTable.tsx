@@ -49,7 +49,7 @@ const RestaurantsTable = () => {
   const prevPage = () => setPage(page! - 1);
   const nextPage = () => setPage(page! + 1);
   const pagesArray = Array.from(
-    { length: restaurantData?.page ?? 1 }, // page should be last_page
+    { length: restaurantData?.totalPages ?? 1 }, // page should be last_page
     (_, index) => index + 1
   );
 
@@ -72,10 +72,10 @@ const RestaurantsTable = () => {
                 Contact
               </th>
               <th scope="col" className="px-6 py-3">
-                Since
+                Cuisine
               </th>
 
-              <th scope="col" className="pl-6 py-3 pr-8 text-end">
+              <th scope="col" className="pl-6 py-3 pr-14 text-end">
                 Actions
               </th>
             </tr>
@@ -83,9 +83,9 @@ const RestaurantsTable = () => {
 
           <tbody className="w-full opacity-80">
             {restaurantData?.content?.map(
-              ({ id, name, email, contact, since }: any) => (
+              ({ restaurantId, name, email, contact, cuisine }: any) => (
                 <tr
-                  key={id}
+                  key={restaurantId}
                   className={cn(
                     "text-sm border-b odd:bg-white even:bg-gray-50"
                   )}
@@ -94,7 +94,7 @@ const RestaurantsTable = () => {
                     scope="row"
                     className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                   >
-                    {id}
+                    {restaurantId}
                   </td>
                   <td
                     scope="row"
@@ -118,13 +118,13 @@ const RestaurantsTable = () => {
                     scope="row"
                     className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                   >
-                    {since}
+                    {cuisine}
                   </td>
                   <td
                     scope="row"
-                    className="flex justify-end whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
+                    className="flex justify-end whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white gap-2"
                   >
-                    <Link href={`/dashboard/restaurants/view_restaurant/${id}`}>
+                    <Link href={`/dashboard/restaurants/view_restaurant/${restaurantId}`}>
                       <Button
                         variant={"secondary"}
                         size={"icon"}
@@ -133,7 +133,7 @@ const RestaurantsTable = () => {
                         <Eye className="size-5" />
                       </Button>
                     </Link>
-                    <Link href={`/dashboard/restaurants/edit_restaurant/${id}`}>
+                    <Link href={`/dashboard/restaurants/edit_restaurant/${restaurantId}`}>
                       <Button
                         variant={"secondary"}
                         size={"icon"}
@@ -144,7 +144,7 @@ const RestaurantsTable = () => {
                     </Link>
                     <AlertDialog>
                       <AlertDialogTrigger>
-                        <Button size={"icon"}>
+                        <Button size={"icon"} className="bg-destructive text-white hover:bg-destructive/80">
                           <Trash className="size-5" />
                         </Button>
                       </AlertDialogTrigger>
@@ -163,7 +163,7 @@ const RestaurantsTable = () => {
                             Cancel
                           </AlertDialogCancel>
                           <AlertDialogAction
-                            onClick={() => handleDelete(id)}
+                            onClick={() => handleDelete(restaurantId)}
                             className="bg-red-400 hover:bg-red-500 "
                           >
                             {Deleting ? (
@@ -219,7 +219,7 @@ const RestaurantsTable = () => {
         />
         <Button
           onClick={nextPage}
-          disabled={page === restaurantData?.page}
+          disabled={page === restaurantData?.totalPages}
         >
           Next
         </Button>
