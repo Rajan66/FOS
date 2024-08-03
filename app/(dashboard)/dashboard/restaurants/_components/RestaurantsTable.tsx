@@ -144,7 +144,7 @@ const RestaurantsTable = () => {
                     </Link>
                     <AlertDialog>
                       <AlertDialogTrigger>
-                        <Button size={"icon"}>
+                        <Button size={"icon"} className="bg-destructive text-white hover:bg-destructive/80">
                           <Trash className="size-5" />
                         </Button>
                       </AlertDialogTrigger>

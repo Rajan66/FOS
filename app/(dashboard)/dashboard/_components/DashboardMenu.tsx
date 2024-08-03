@@ -33,7 +33,9 @@ const DashboardMenu = async () => {
             <MblSidebarItem key={index} link={item.link} name={item.name} />
           ))}
         </div>
-        <LogoutBtn />
+        <div className="flex justify-start items-center mb-10 mr-10">
+          <LogoutBtn />
+        </div>
       </SheetContent>
       <SheetFooter>
 

@@ -113,7 +113,7 @@ const UserForm = ({ id, token }: Props) => {
       />
       <div className="flex gap-10">
         <Link
-          href={"/dashboard/profile/ChangePassword"}
+          href={"/dashboard/profile/change-password"}
           className="text-primary transition underline underline-offset-2 font-semibold"
         >
           <Button

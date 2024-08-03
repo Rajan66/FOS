@@ -1,9 +1,9 @@
-import React from 'react'
+import SignupForm from "../_components/SignupForm";
 
-const page = () => {
+export default function LoginPage() {
   return (
-    <div>Sign Up Page</div>
-  )
+    <section className='w-full flex items-center justify-center mt-20'>
+      <SignupForm />
+    </section>
+  );
 }
-
-export default page

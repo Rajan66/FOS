@@ -14,7 +14,7 @@ const Sidebar = async () => {
   const userRole = session?.user?.role;
 
   return (
-    <aside className="custom-scrollbar hidden py-10 fixed left-0 top-0 h-screen overflow-y-auto w-[250px] bg-gray-100 text-background lg:flex flex-col items-start gap-y-14 border-r border-r-secondary">
+    <aside className="custom-scrollbar hidden py-10 fixed left-0 top-0 h-screen overflow-y-auto w-[250px] bg-gray-100 text-background lg:flex flex-col items-start gap-y-14 border-r border-r-primary">
       <Link href={"/"} className="px-8">
         <Image
           src={logo}
@@ -31,7 +31,9 @@ const Sidebar = async () => {
           ))}
         </div>
       </div>
-      <LogoutBtn />
+      <div className="flex justify-center items-center px-4">
+        <LogoutBtn />
+      </div>
     </aside>
   );
 };
