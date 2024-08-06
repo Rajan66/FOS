@@ -22,6 +22,7 @@ const Food = () => {
                     plugins={[
                         Autoplay({
                             delay: 2000,
+                            stopOnMouseEnter: true,                         
                         }),
                     ]}
                     opts={{
@@ -32,13 +33,13 @@ const Food = () => {
                     <CarouselContent className="flex">
                         {foodItems.map((food, index) => (
                             <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3 xl:basis-1/5">
-                                <div className="flex flex-col justify-center items-center gap-2">
+                                <div className="flex flex-col justify-center items-center gap-2 h-[200px]">
                                     <Image
                                         src={food.image}
                                         alt='food'
                                         width={150}
                                         height={150}
-                                        className='w-[130px] h-[120px] border rounded-full bg-gray-50'
+                                        className='w-[130px] h-[120px] border rounded-full bg-gray-50 transition-transform duration-300 ease-in-out hover:scale-110'
                                     />
                                     <span className='text-lg font-semibold opacity-70'>{food.name}</span>
                                 </div>
@@ -46,8 +47,8 @@ const Food = () => {
                         ))}
                     </CarouselContent>
                     <div className='hidden md:block'>
-                    <CarouselPrevious />
-                    <CarouselNext />
+                        <CarouselPrevious />
+                        <CarouselNext />
                     </div>
                 </Carousel>
             </div>
