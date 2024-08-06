@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import Autoplay from "embla-carousel-autoplay"
 import {
@@ -14,8 +14,6 @@ import {
 import { cuisineItems } from './list/cuisineItems'
 
 const Cuisine = () => {
-    const autoplayRef = useRef(null);
-
     return (
         <section className="mt-20 mx-[20px] md:mx-[40px] 2xl:mx-[80px] max-md:flex-wrap">
             <h1 className="text-[42px] font-bold text-center">Cuisines you may like</h1>

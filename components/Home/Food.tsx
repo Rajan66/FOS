@@ -1,6 +1,5 @@
 "use client"
 
-import React from 'react'
 import Image from 'next/image'
 import Autoplay from "embla-carousel-autoplay"
 import {
@@ -22,8 +21,8 @@ const Food = () => {
                     plugins={[
                         Autoplay({
                             delay: 2000,
-                            stopOnMouseEnter: true,                         
-                        }),
+                            stopOnMouseEnter: true,
+                        })
                     ]}
                     opts={{
                         loop: true
