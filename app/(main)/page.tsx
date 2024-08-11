@@ -5,6 +5,7 @@ import Hero from '@/components/Home/Hero'
 import React from 'react'
 import Restaurants from '@/components/Home/Restaurants'
 import Recommendations from '@/components/Home/Recommendations'
+import Request from '@/components/Home/Request'
 
 const page = () => {
   return (
@@ -18,6 +19,8 @@ const page = () => {
       <Divider />
       <Cuisine />
       <Divider />
+      <Request/>
+      <Divider/>
     </div>
   )
 }

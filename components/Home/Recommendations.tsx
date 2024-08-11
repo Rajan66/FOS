@@ -31,10 +31,11 @@ const Recommendations = () => {
                 }}
                 className="max-w-full justify-center flex"
             >
+                <div className='xl:mx-20'>
                 <CarouselContent className="flex">
                     {Array.from({ length: 5 }).map((_, index) => (
                         <CarouselItem key={index} className="basis-full">
-                            <div className="max-md:max-w-full mt-10 md:mt-20 ">
+                            <div className="max-md:max-w-full mx-10 mt-10 md:mt-20 ">
                                 <div className="flex gap-5 max-mmd:flex-col max-md:gap-0">
                                     <div className="flex flex-col w-[41%] max-mmd:w-full">
                                         <Image
@@ -62,8 +63,9 @@ const Recommendations = () => {
                                 </div>
                             </div>
                         </CarouselItem>
-                    ))}
+                   ))}
                 </CarouselContent>
+                </div>
                 <div className='hidden md:block'>
                     <CarouselPrevious />
                     <CarouselNext />

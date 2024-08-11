@@ -29,6 +29,7 @@ const Food = () => {
                     }}
                     className="max-w-full justify-center flex"
                 >
+                    <div className='mx-5 xl:mx-20'>
                     <CarouselContent className="flex">
                         {foodItems.map((food, index) => (
                             <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3 xl:basis-1/5">
@@ -45,6 +46,7 @@ const Food = () => {
                             </CarouselItem>
                         ))}
                     </CarouselContent>
+                    </div>
                     <div className='hidden md:block'>
                         <CarouselPrevious />
                         <CarouselNext />
