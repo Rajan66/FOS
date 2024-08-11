@@ -1,6 +1,7 @@
 import {
   DeleteRequest,
   GetRequest,
+  PatchRequest,
   PostRequest,
   PutRequest,
 } from "@/lib/axios/client/axios";
@@ -55,9 +56,13 @@ type UpdateProps = {
 
 export const updateUserDetails = async (params: UpdateProps) => {
   try {
-    const response = await PutRequest(`/api/users/${params.id}`, params.data, {
-      headers: { authorization: `Bearer ${params.token}` },
-    });
+    const response = await PatchRequest(
+      `/api/users/${params.id}`,
+      params.data,
+      {
+        headers: { authorization: `Bearer ${params.token}` },
+      }
+    );
     return response;
   } catch (error: any) {
     return error;
