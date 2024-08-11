@@ -29,7 +29,7 @@ export default function SignupForm() {
     const { mutate, isPending } = useMutation({
         mutationFn: registerUser,
         onSettled(data: any) {
-            if (data.status === 201) {
+            if (data.status === 200) {
                 toast.success("Register Successfull");
                 router.push("/login");
             } else {
@@ -48,7 +48,7 @@ export default function SignupForm() {
             onSubmit={handleSubmit(onSubmit)}
             className="relative w-[500px] mx-auto flex flex-col justify-center gap-y-10 rounded-lg bg-gray-50 px-14 pb-4 pt-8 border border-input"
         >
-            <h1 className="text-2xl text-secondary font-bold opacity-80">
+            <h1 className="text-2xl text-primary font-bold opacity-80">
                 Create An Account
             </h1>
             <div className="flex flex-col gap-y-4 w-full text-gray-500">
@@ -56,19 +56,19 @@ export default function SignupForm() {
                     <Label htmlFor="name">First Name</Label>
                     <div className="relative flex flex-col gap-y-1">
                         <Input
-                            {...register("firstname")}
+                            {...register("firstName")}
                             className={cn("pl-10 py-5", {
-                                "border-primary": errors?.firstname?.message,
+                                "border-primary": errors?.firstName?.message,
                             })}
-                            id="firstname"
+                            id="firstName"
                             type="text"
-                            name="firstname"
+                            name="firstName"
                             placeholder="Enter your First name"
                         />
                         <CircleUserRound className="pointer-events-none absolute top-[0.7rem] left-3 size-5 text-gray-500 peer-focus:text-gray-900" />
-                        {errors?.firstname?.message && (
+                        {errors?.firstName?.message && (
                             <span className="text-destructive text-xs font-semibold">
-                                {errors?.firstname?.message}
+                                {errors?.firstName?.message}
                             </span>
                         )}
                     </div>
@@ -77,19 +77,19 @@ export default function SignupForm() {
                     <Label htmlFor="name">Last Name</Label>
                     <div className="relative flex flex-col gap-y-1">
                         <Input
-                            {...register("lastname")}
+                            {...register("lastName")}
                             className={cn("pl-10 py-5", {
-                                "border-primary": errors?.lastname?.message,
+                                "border-primary": errors?.lastName?.message,
                             })}
-                            id="lastname"
+                            id="lastName"
                             type="text"
-                            name="lastname"
+                            name="lastName"
                             placeholder="Enter your Last name"
                         />
                         <CircleUserRound className="pointer-events-none absolute top-[0.7rem] left-3 size-5 text-gray-500 peer-focus:text-gray-900" />
-                        {errors?.lastname?.message && (
+                        {errors?.lastName?.message && (
                             <span className="text-destructive text-xs font-semibold">
-                                {errors?.lastname?.message}
+                                {errors?.lastName?.message}
                             </span>
                         )}
                     </div>
@@ -179,7 +179,7 @@ export default function SignupForm() {
                 <p>Already have an account?</p>
                 <Link
                     href={"/login"}
-                    className="text-blue-500 hover:underline transition"
+                    className="text-red-500 hover:underline transition"
                 >
                     Login Instead
                 </Link>

@@ -14,6 +14,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
+import { ChevronRight } from 'lucide-react'
 
 const Recommendations = () => {
     return (
@@ -53,8 +54,8 @@ const Recommendations = () => {
                                                 Lorem ipsum dolor sit amet consectetur. Nibh rhoncus tincidunt in posuere morbi in ac fames et. Duis lacus scelerisque in massa dictumst nibh phasellus. Malesuada nisl in eget curabitur interdum. Leo scelerisque condimentum id ac justo praesent. Viverra fringilla et pretium nibh pellentesque vulputate viverra interdum. Ipsum montes tincidunt diam amet tristique varius nec quis posuere. Aliquam eu pharetra pharetra scelerisque id dolor.
                                             </p>
                                             <Link href="/about" className="flex justify-start items-center mt-[28px]">
-                                                <Button className="">
-                                                    {`Order Now ->`}
+                                                <Button className="text-base text-white bg-primary hover:bg-primary/90">
+                                                    {`Order Now`} <ChevronRight/>
                                                 </Button>
                                             </Link>
                                         </div>
