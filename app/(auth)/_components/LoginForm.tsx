@@ -51,10 +51,10 @@ const LoginForm = () => {
 
   return (
     <form
-      className="w-full flex flex-col gap-5 bg-gray-100 justify-center items-center max-w-sm rounded-md p-10"
+      className="w-full flex flex-col gap-y-10 bg-gray-50 justify-center items-center max-w-sm rounded-lg p-10 border border-input"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="text-2xl text-black font-bold opacity-80 ">
+      <h1 className="text-2xl text-primary font-bold opacity-80 ">
         Please log in to continue.
       </h1>
       {errorMsg && (
@@ -112,11 +112,10 @@ const LoginForm = () => {
             )}
           </div>
         </div>
-        <Button type="submit" className="px-5 py-2.5 my-auto text-[16px] w-[200px] h-[40px] font-medium text-white uppercase bg-red-500 border-r-0 rounded-sm">
+        <Button type="submit" className="w-full">
           {loading ? (
             <span className="flex items-center gap-x-2">
-              <Loader2 className="size-5 animate-spin" />
-              Logging In...{" "}
+              <Loader2 className="size-5 animate-spin" />Logging In...{" "}
             </span>
           ) : (
             "Login"
