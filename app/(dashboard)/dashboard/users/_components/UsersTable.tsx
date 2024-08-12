@@ -134,13 +134,13 @@ const UsersTable = () => {
                     scope="row"
                     className="flex justify-end whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white gap-2"
                   >
-                    <Link href={`/dashboard/users/users_details/${id}`}>
+                    <Link href={`/dashboard/users/edit_user/${id}`}>
                       <Button
                         variant={"secondary"}
                         size={"icon"}
                         className="text-background"
                       >
-                        <Eye className="size-5" />
+                        <Edit className="size-5" />
                       </Button>
                     </Link>
                     <AlertDialog>

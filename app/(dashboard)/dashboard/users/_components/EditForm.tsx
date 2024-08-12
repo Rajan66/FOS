@@ -25,8 +25,11 @@ const EditForm: React.FC<EditProps> = ({ id, fromProfilePage = false }) => {
   const router = useRouter();
   const session = useSession();
   const queryClient = useQueryClient();
-  const { data: userData, isPending } = useGetUserDetails(Number(id), session?.data?.accessToken);
+  console.log(`User ID: ${Number(id)}`)
+  console.log(`Admin Token: ${session?.data?.user?.access_token}`)
+  const { data: userData, isPending } = useGetUserDetails(Number(id), session?.data?.user?.access_token);
 
+  console.log(userData)
 
   const {
     control,
