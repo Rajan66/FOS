@@ -20,7 +20,7 @@ const LogoutBtn = () => {
   if (session?.data?.user) {
     return (
       <form className="" onSubmit={handleSubmit}>
-        <Button className="flex justify-start items-center font-bold text-lg">
+        <Button className="flex justify-start items-center font-semibold text-white text-base bg-primary hover:bg-primary/90">
           <LogOut className="size-6" strokeWidth={3} />
           &nbsp; Logout
         </Button>
