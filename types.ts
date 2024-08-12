@@ -13,6 +13,7 @@ type Restaurant = {
   email: string;
   contact: string;
   cuisine: string;
+  image: string | null;
 };
 
 type Menu = {

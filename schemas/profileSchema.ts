@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const userSchema = z.object({
+export const UserSchema = z.object({
   firstName: z
     .string({ required_error: "First Name is required" })
     .min(1, { message: "First Name is required" }),
@@ -18,7 +18,7 @@ export const userSchema = z.object({
   createdAt: z.string().optional(),
 });
 
-export type TUser = z.infer<typeof userSchema>;
+export type TUser = z.infer<typeof UserSchema>;
 
 export const changePassSchema = z.object({
   password: z

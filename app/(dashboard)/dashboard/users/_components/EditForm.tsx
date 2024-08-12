@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import ImageUpload from "../_components/ImageUpload";
 import { useRouter } from "next/navigation";
 import { useGetUserDetails } from "@/hooks/usersQueries";
-import { TUser, userSchema } from "@/schemas/profileSchema";
+import { TUser, UserSchema } from "@/schemas/profileSchema";
 import { updateUserDetails } from "@/apicalls/users";
 
 type EditProps = {
@@ -39,7 +39,7 @@ const EditForm: React.FC<EditProps> = ({ id, fromProfilePage = false }) => {
     setValue,
     reset,
   } = useForm<TUser>({
-    resolver: zodResolver(userSchema),
+    resolver: zodResolver(UserSchema),
     defaultValues: {
       firstName: userData?.firstName,
       lastName: userData?.lastName,
