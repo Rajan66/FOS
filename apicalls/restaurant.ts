@@ -41,9 +41,7 @@ export const getRestaurantDetail = async (id: number) => {
   try {
     const response = await GetRequest(
       `/api/restaurants/${id}`,
-      {
-        restaurantId: id,
-      },
+      {},
       {
         headers: {},
       }
@@ -54,18 +52,18 @@ export const getRestaurantDetail = async (id: number) => {
   }
 };
 
-export const updateRestaurant = async (
-  id: number,
-  data: any,
-  token: string
-) => {
+export const updateRestaurant = async (data: {
+  id: number;
+  data: any;
+  token: string | undefined;
+}) => {
   try {
     const response = await PutRequest(
-      `/api/restaurants/${id}`,
-      { data: data },
+      `/api/restaurants/${data.id}`,
+      { data: data.data },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${data.token}`,
         },
       }
     );

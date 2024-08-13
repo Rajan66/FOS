@@ -6,7 +6,6 @@ import { ChevronRight } from "lucide-react";
 
 const Page = () => {
   const session = useSession();
-  console.log(session.data?.user)
   return (
     <section className="relative max-w-[1502px] flex flex-col gap-y-10 justify-start mb-20">
       <h2 className="text-[1.3rem] vsm:text-[1.5rem] font-semibold opacity-80 underline underline-offset-2">

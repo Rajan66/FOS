@@ -32,7 +32,6 @@ const LoginForm = () => {
 
   const onSubmit = async (data: TLogin) => {
     setLoading(true);
-    console.log(data)
     try {
       const res = (await authenticate(data)) as any;
       console.log(res)

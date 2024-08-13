@@ -31,7 +31,8 @@ const UserForm = ({ id, token }: Props) => {
       firstName: data?.firstName,
       lastName: data?.lastName,
       email: data?.email,
-      contact: data?.contact?.toString(),
+      contact: data?.contact || "",
+      role: data?.role
     },
   });
 
@@ -40,7 +41,8 @@ const UserForm = ({ id, token }: Props) => {
       setValue("firstName", data?.firstName);
       setValue("lastName", data?.lastName);
       setValue("email", data?.email);
-      setValue("contact", data?.contact?.toString());
+      setValue("contact", data?.contact || "");
+      setValue("role", data?.role)
     }
   }, [data, setValue]);
 
@@ -61,6 +63,7 @@ const UserForm = ({ id, token }: Props) => {
   });
 
   const onSubmit = (data: TUser) => {
+    console.log(data)
     const modifiedData = {
       data,
       id,
@@ -111,7 +114,7 @@ const UserForm = ({ id, token }: Props) => {
         desc="enter the contact."
         label="Contact"
       />
-      <div className="flex gap-10">
+      <div className="flex flex-col vvsm:flex-row gap-10">
         <Link
           href={"/dashboard/profile/change-password"}
           className="text-primary transition underline underline-offset-2 font-semibold"
