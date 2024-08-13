@@ -3,7 +3,6 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export const useGetAllUsers = (
   pageParam: number | undefined,
-  
   token: string | undefined
 ) => {
   const { data, isPending } = useQuery<PaginatedUsersData>({

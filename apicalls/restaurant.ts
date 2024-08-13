@@ -1,22 +1,26 @@
 import {
   DeleteRequest,
   GetRequest,
+  PatchRequest,
   PostRequest,
   PutRequest,
 } from "@/lib/axios/client/axios";
 
-export const createRestaurant = async (data: any, token: string) => {
+export const createRestaurant = async (data: {
+  data: any;
+  token: string | undefined;
+}) => {
   try {
     const response = await PostRequest(
       `/api/restaurants`,
-      { data: data },
+      {...data.data },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${data.token}`,
         },
       }
     );
-    return response.data;
+    return response;
   } catch (error: any) {
     throw new Error(error?.message);
   }
@@ -58,16 +62,16 @@ export const updateRestaurant = async (data: {
   token: string | undefined;
 }) => {
   try {
-    const response = await PutRequest(
+    const response = await PatchRequest(
       `/api/restaurants/${data.id}`,
-      { data: data.data },
+      {...data.data },
       {
         headers: {
           Authorization: `Bearer ${data.token}`,
         },
       }
     );
-    return response.data;
+    return response;
   } catch (error: any) {
     throw new Error(error?.message);
   }
@@ -83,7 +87,7 @@ export const deleteRestaurant = async (data: {
         Authorization: `Bearer ${data.token}`,
       },
     });
-    return response.data;
+    return response;
   } catch (error: any) {
     throw new Error(error?.message);
   }

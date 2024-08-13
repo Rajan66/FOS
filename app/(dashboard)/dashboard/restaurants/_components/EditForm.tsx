@@ -27,7 +27,7 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
   const session = useSession()
   const { data: restaurantData, isPending } = useGetRestaurant(Number(id));
 
-  console.log(restaurantData)
+  // console.log(restaurantData)
 
   const {
     control,
@@ -81,6 +81,7 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
   });
 
   const onSubmit = (data: TRestaurant) => {
+    console.log(data)
     const modifiedData = {
       id: Number(id),
       data: {
@@ -146,11 +147,11 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
 
       {/* Optional Fields  */}
 
-      <ImageUpload
+      {/* <ImageUpload
         control={control}
         errors={errors}
         defImg={restaurantData?.image?.split("/")[1]}
-      />
+      /> */}
 
 
       {/* Form Submission */}
