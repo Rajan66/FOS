@@ -15,7 +15,6 @@ type ImageUploadProps = {
 };
 
 const ImageUpload = ({ control, errors, defImg }: ImageUploadProps) => {
-  // for storing instructor Image
   const [file, setFile] = useState<File | undefined>();
   const [defaultImage, setDefaultImage] = useState<string | undefined>(defImg);
   const imgRef = useRef<HTMLInputElement>(null);
@@ -31,29 +30,45 @@ const ImageUpload = ({ control, errors, defImg }: ImageUploadProps) => {
     setDefaultImage(undefined);
   };
 
+  // Function to convert file to Base64
+  const handleImageUpload = async (file: File | undefined) => {
+    if (!file) return null;
+
+    return new Promise<string | null>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   return (
     <div className="flex flex-col">
-      {/* Image Upload  */}
       <Controller
         name="image"
         control={control}
-        render={({ field }) => {
-          return (
-            <div>
-              <input
-                type="file"
-                name="image"
-                onChange={(e) => {
-                  field.onChange(e.target.files?.[0]);
-                  setFile(e.target.files?.[0]);
-                }}
-                hidden
-                ref={imgRef}
-                accept="image/jpg, image/jpeg, image/png, image/webp"
-              />
-            </div>
-          );
-        }}
+        render={({ field }) => (
+          <div>
+            <input
+              type="file"
+              name="image"
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                setFile(file);
+
+                if (file) {
+                  const base64Image = await handleImageUpload(file);
+                  field.onChange(base64Image?.split(",")[1]); // Set Base64 string
+                } else {
+                  field.onChange(undefined); // Reset the field if no file is selected
+                }
+              }}
+              hidden
+              ref={imgRef}
+              accept="image/jpg, image/jpeg, image/png, image/webp"
+            />
+          </div>
+        )}
       />
 
       <div className="flex vsm:flex-row flex-col gap-y-2 vsm:items-center gap-x-10">

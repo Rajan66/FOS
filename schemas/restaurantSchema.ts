@@ -15,7 +15,7 @@ export const RestaurantSchema = z.object({
 
   //<------- Optional Fields ------->
   contact: z.string().optional(),
-  image: z.string().optional(),
+  image: z.string().optional()
 });
 
 export type TRestaurant = z.infer<typeof RestaurantSchema>;
