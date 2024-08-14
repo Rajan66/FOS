@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useGetRestaurant } from "@/hooks/restaurantsQueries";
 import { updateRestaurant } from "@/apicalls/restaurant";
 import { RestaurantSchema, TRestaurant } from "@/schemas/restaurantSchema";
+import TextAreaBox from "@/components/TextAreaBox";
 
 type EditProps = {
   id: string;
@@ -42,6 +43,9 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
       cuisine: restaurantData?.cuisine,
       contact: restaurantData?.contact?.toString(),
       image: restaurantData?.image?.toString(),
+      description: restaurantData?.description,
+      address: restaurantData?.address,
+      status: restaurantData?.status,
     },
   });
 
@@ -56,6 +60,9 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
         restaurantData?.contact?.toString()
       );
       setValue("image", restaurantData?.image?.toString());
+      setValue("description", restaurantData?.description || "");
+      setValue("address", restaurantData?.address || "");
+      setValue("status", restaurantData?.status || "inactive");
     }
   }, [restaurantData, setValue]);
 
@@ -147,6 +154,35 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
         label="Restaurant's Contact *"
       />
 
+      <TextAreaBox<TRestaurant>
+        name="description"
+        id="description"
+        placeholder="Restaurant's Description*"
+        register={register}
+        error={(errors && errors?.description?.message?.toString()) || ""}
+        desc="enter the restaurant's description"
+        label="Restaurant's Description *"
+      />
+
+      <InputBox<TRestaurant>
+        name="address"
+        id="address"
+        placeholder="Enter Restaurant's Address..."
+        register={register}
+        error={(errors && errors?.address?.message?.toString()) || ""}
+        desc="enter the restaurant's address"
+        label="Restaurant's Address *"
+      />
+
+      <InputBox<TRestaurant>
+        name="status"
+        id="status"
+        placeholder="Active or Inactive..."
+        register={register}
+        error={(errors && errors?.contact?.message?.toString()) || ""}
+        desc="enter the restaurant's status"
+        label="Restaurant's Status *"
+      />
 
       <ImageUpload
         control={control}

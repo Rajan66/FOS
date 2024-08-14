@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { TRestaurant, RestaurantSchema } from "@/schemas/restaurantSchema";
+import TextAreaBox from "@/components/TextAreaBox";
 
 
 const RestaurantForm = () => {
@@ -110,6 +111,35 @@ const RestaurantForm = () => {
                 label="Restaurant's contact *"
             />
 
+            <TextAreaBox<TRestaurant>
+                name="description"
+                id="description"
+                placeholder="Restaurant's Description*"
+                register={register}
+                error={(errors && errors?.description?.message?.toString()) || ""}
+                desc="enter the restaurant's description"
+                label="Restaurant's Description *"
+            />
+
+            <InputBox<TRestaurant>
+                name="address"
+                id="address"
+                placeholder="Enter Restaurant's Address..."
+                register={register}
+                error={(errors && errors?.address?.message?.toString()) || ""}
+                desc="enter the restaurant's address"
+                label="Restaurant's Description *"
+            />
+
+            <InputBox<TRestaurant>
+                name="status"
+                id="status"
+                placeholder="Active or Inactive..."
+                register={register}
+                error={(errors && errors?.contact?.message?.toString()) || ""}
+                desc="enter the restaurant's status"
+                label="Restaurant's Status *"
+            />
 
             <ImageUpload control={control} errors={errors} token={session?.data?.user?.access_token} />
 
