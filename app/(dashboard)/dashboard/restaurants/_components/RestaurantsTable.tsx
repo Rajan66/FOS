@@ -74,7 +74,12 @@ const RestaurantsTable = () => {
               <th scope="col" className="px-6 py-3">
                 Cuisine
               </th>
-
+              <th scope="col" className="px-6 py-3">
+                Address
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Status
+              </th>
               <th scope="col" className="pl-6 py-3 pr-14 text-end">
                 Actions
               </th>
@@ -83,7 +88,7 @@ const RestaurantsTable = () => {
 
           <tbody className="w-full opacity-80">
             {restaurantData?.content?.map(
-              ({ restaurantId, name, email, contact, cuisine }: any) => (
+              ({ restaurantId, name, email, contact, cuisine, address, status }: any) => (
                 <tr
                   key={restaurantId}
                   className={cn(
@@ -119,6 +124,18 @@ const RestaurantsTable = () => {
                     className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                   >
                     {cuisine}
+                  </td>
+                  <td
+                    scope="row"
+                    className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
+                  >
+                    {address}
+                  </td>
+                  <td
+                    scope="row"
+                    className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
+                  >
+                    {status}
                   </td>
                   <td
                     scope="row"

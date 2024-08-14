@@ -5,7 +5,7 @@ import Footer from "@/components/Footer/Footer";
 
 export default function HomeLayout({ children }: { children: React.ReactNode }) {
   return (
-    <section>
+    <section className="overflow-x-hidden">
       <Navbar />
       <main>{children}</main>
       <Footer />

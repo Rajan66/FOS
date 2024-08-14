@@ -17,7 +17,7 @@ const MblNavItem = ({ name, href }: MblNavItemProps) => {
       className={cn(
         "flex items-center justify-center py-3 text-foreground xl:text-[1rem] opacity-80 hover:opacity-100 transition duration-150",
         {
-          "text-base font-semibold opacity-100 text-yellow-500": pathname === href,
+          "text-red-600 opacity-100 font-semibold": pathname === href,
         }
       )}
     >

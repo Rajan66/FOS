@@ -15,7 +15,6 @@ type ImageUploadProps = {
 };
 
 const ImageUpload = ({ control, errors, defImg }: ImageUploadProps) => {
-  // for storing instructor Image
   const [file, setFile] = useState<File | undefined>();
   const [defaultImage, setDefaultImage] = useState<string | undefined>(defImg);
   const imgRef = useRef<HTMLInputElement>(null);

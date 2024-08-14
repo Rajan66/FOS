@@ -14,7 +14,7 @@ const page = () => {
         <Link href={"/dashboard/restaurants/add_restaurant"} className='xvsm:p-0 pb-6 m-0'>
           <Button className="px-5 py-2.5 my-auto text-[16px] bg-primary hover:bg-primary/80 font-medium text-white rounded-md  border-r-0">
             <PlusCircle className="size-5" />
-            &nbsp; Add Restaurants
+            &nbsp; Add Restaurant
           </Button>
         </Link>
       </div>

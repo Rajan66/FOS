@@ -14,6 +14,9 @@ type Restaurant = {
   contact: string;
   cuisine: string;
   image: string | undefined;
+  description: string;
+  status: string;
+  address: string;
 };
 
 type Menu = {
