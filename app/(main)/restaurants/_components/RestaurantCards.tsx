@@ -5,6 +5,8 @@ import restaurantImage from '@/public/assets/restaurant.png';
 import { useGetAllRestaurants } from "@/hooks/restaurantsQueries";
 import Loading from "@/components/Loading";
 import { ChefHat, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const RestaurantCards = ({ searchTerm }: any) => {
     const [page, setPage] = useState<number>(1);
@@ -91,9 +93,11 @@ const RestaurantCards = ({ searchTerm }: any) => {
                             </div>
                         </CardContent>
                         <CardFooter className="p-4">
-                            <button className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition-colors">
-                                View Details
-                            </button>
+                            <Link href={`/restaurants/${restaurant.restaurantId}`}>
+                                <Button className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition-colors">
+                                    View Details
+                                </Button>
+                            </Link>
                         </CardFooter>
                     </Card>
                 ))}
