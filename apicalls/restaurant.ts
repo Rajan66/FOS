@@ -13,7 +13,7 @@ export const createRestaurant = async (data: {
   try {
     const response = await PostRequest(
       `/api/restaurants`,
-      {...data.data },
+      { ...data.data },
       {
         headers: {
           Authorization: `Bearer ${data.token}`,
@@ -62,9 +62,10 @@ export const updateRestaurant = async (data: {
   token: string | undefined;
 }) => {
   try {
+    console.log(data);
     const response = await PatchRequest(
       `/api/restaurants/${data.id}`,
-      {...data.data },
+      { ...data.data },
       {
         headers: {
           Authorization: `Bearer ${data.token}`,

@@ -49,11 +49,17 @@ const RestaurantForm = () => {
 
 
     const onSubmit = async (data: TRestaurant) => {
+        const { image, ...resData } = data;
+
         console.log(data)
         const restaurantData = {
-            data: data,
+            data: {
+                ...resData,
+                image: image
+            },
             token: session?.data?.user?.access_token
         };
+        console.log(restaurantData)
         mutate(restaurantData);
     }
 
@@ -105,7 +111,7 @@ const RestaurantForm = () => {
             />
 
 
-            <ImageUpload control={control} errors={errors} />
+            <ImageUpload control={control} errors={errors} token={session?.data?.user?.access_token} />
 
 
             {/* Form Submission */}

@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -7,14 +5,19 @@ import { useRef, useState, useEffect } from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { Image as ImgIcon, X } from "lucide-react";
 import { TRestaurant } from "@/schemas/restaurantSchema";
+import { uploadImage } from "@/apicalls/imageUpload";
+
+// Define the API URL
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
 type ImageUploadProps = {
   control: Control<TRestaurant>;
   errors?: FieldErrors<TRestaurant>;
   defImg?: string;
+  token?: string; // Added token prop for authentication
 };
 
-const ImageUpload = ({ control, errors, defImg }: ImageUploadProps) => {
+const ImageUpload = ({ control, errors, defImg, token }: ImageUploadProps) => {
   const [file, setFile] = useState<File | undefined>();
   const [defaultImage, setDefaultImage] = useState<string | undefined>(defImg);
   const imgRef = useRef<HTMLInputElement>(null);
@@ -25,21 +28,45 @@ const ImageUpload = ({ control, errors, defImg }: ImageUploadProps) => {
     setDefaultImage(defImg);
   }, [defImg]);
 
-  const handleDeleteImage = () => {
-    setFile(undefined);
-    setDefaultImage(undefined);
+  // Function to handle file upload
+  const handleFileChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: any // Add field parameter to this function
+  ) => {
+    const selectedFile = e.target.files?.[0];
+    setFile(selectedFile);
+
+    if (selectedFile) {
+      try {
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+
+        // Upload the image
+        const response = await uploadImage({
+          data: formData,
+          token: token,
+        });
+        console.log(response)
+        // Assuming response contains the URL or path of the uploaded image
+        const imageUrl = response.data.image; // Adjust this based on your backend response
+
+        // Update the form field with the image URL or path
+        field.onChange(imageUrl);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+    } else {
+      // Clear the field if no file is selected
+      field.onChange(undefined);
+    }
   };
 
-  // Function to convert file to Base64
-  const handleImageUpload = async (file: File | undefined) => {
-    if (!file) return null;
-
-    return new Promise<string | null>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
+  // Handle image deletion
+  const handleDeleteImage = (field: any) => {
+    setFile(undefined);
+    setDefaultImage(undefined);
+    field.onChange(undefined);
+    setDefaultImage(undefined);
   };
 
   return (
@@ -52,79 +79,69 @@ const ImageUpload = ({ control, errors, defImg }: ImageUploadProps) => {
             <input
               type="file"
               name="image"
-              onChange={async (e) => {
-                const file = e.target.files?.[0];
-                setFile(file);
-
-                if (file) {
-                  const base64Image = await handleImageUpload(file);
-                  field.onChange(base64Image?.split(",")[1]); // Set Base64 string
-                } else {
-                  field.onChange(undefined); // Reset the field if no file is selected
-                }
-              }}
+              onChange={(e) => handleFileChange(e, field)} // Pass field here
               hidden
               ref={imgRef}
               accept="image/jpg, image/jpeg, image/png, image/webp"
             />
+
+
+            <div className="flex vsm:flex-row flex-col gap-y-2 vsm:items-center gap-x-10">
+              <Button
+                onClick={() => imgRef?.current?.click()}
+                type="button"
+                className="text-background w-fit bg-gray-900 hover:bg-gray-700"
+              >
+                <ImgIcon className="size-6" /> &nbsp;&nbsp;Select Image
+              </Button>
+
+              {defaultImage && !file && (
+                <div className="relative mt-3 flex size-[100px] cursor-pointer flex-col gap-2 rounded-full">
+                  <Image
+                    src={`${defaultImage}`}
+                    fill
+                    alt=""
+                    className={cn(
+                      "cursor-pointer object-cover rounded-full border border-input",
+                      {
+                        "border-[3px] border-red-500":
+                          errors?.image?.message &&
+                          typeof errors?.image?.message === "string",
+                      }
+                    )}
+                  />
+                  <X
+                    onClick={() => handleDeleteImage(field)}
+                    className="absolute top-1 right-1 p-1 rounded-full bg-primary/90 text-background size-8"
+                  />
+                </div>
+              )}
+
+              {file && typefile === "image" && (
+                <div className="relative mt-3 flex size-[100px] cursor-pointer flex-col gap-2 rounded-full">
+                  <Image
+                    src={URL.createObjectURL(file)}
+                    fill
+                    alt=""
+                    className={cn(
+                      "cursor-pointer object-cover rounded-full border border-input",
+                      {
+                        "border-[3px] border-red-500":
+                          errors?.image?.message &&
+                          typeof errors?.image?.message === "string",
+                      }
+                    )}
+                  />
+                  <X
+                    onClick={() => handleDeleteImage(field)}
+                    className="absolute top-1 right-1 p-1 rounded-full bg-primary/90 text-background size-8"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         )}
       />
-
-      <div className="flex vsm:flex-row flex-col gap-y-2 vsm:items-center gap-x-10">
-        <Button
-          onClick={() => imgRef?.current?.click()}
-          type="button"
-          className="text-background w-fit bg-gray-900 hover:bg-gray-700"
-        >
-          <ImgIcon className="size-6" /> &nbsp;&nbsp;Select Image
-        </Button>
-
-        {defaultImage && !file && (
-          <div className="relative mt-3 flex size-[100px] cursor-pointer flex-col gap-2 rounded-full">
-            <Image
-              src={`${process.env.NEXT_PUBLIC_APP_URL}/storage/${defaultImage}`}
-              fill
-              alt=""
-              className={cn(
-                "cursor-pointer object-cover rounded-full border border-input",
-                {
-                  "border-[3px] border-red-500":
-                    errors?.image?.message &&
-                    typeof errors?.image?.message === "string",
-                }
-              )}
-            />
-            <X
-              onClick={handleDeleteImage}
-              className="absolute top-1 right-1 p-1 rounded-full bg-primary/90 text-background size-8"
-            />
-          </div>
-        )}
-
-        {file && typefile === "image" && (
-          <div className="relative mt-3 flex size-[100px] cursor-pointer flex-col gap-2 rounded-full">
-            <Image
-              src={URL.createObjectURL(file)}
-              fill
-              alt=""
-              className={cn(
-                "cursor-pointer object-cover rounded-full border border-input",
-                {
-                  "border-[3px] border-red-500":
-                    errors?.image?.message &&
-                    typeof errors?.image?.message === "string",
-                }
-              )}
-            />
-            <X
-              onClick={handleDeleteImage}
-              className="absolute top-1 right-1 p-1 rounded-full bg-primary/90 text-background size-8"
-            />
-          </div>
-        )}
-      </div>
-
       {errors?.image?.message ? (
         <span className="pl-3 text-sm font-semibold text-destructive">
           {typeof errors?.image?.message === "string"

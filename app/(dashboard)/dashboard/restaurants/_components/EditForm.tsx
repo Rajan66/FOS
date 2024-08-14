@@ -79,14 +79,18 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
   });
 
   const onSubmit = (data: TRestaurant) => {
+    const { image, ...resData } = data;
     console.log(data)
+
     const modifiedData = {
       id: Number(id),
       data: {
-        ...data,
+        ...resData,
+        image: image
       },
       token: session?.data?.user?.access_token
     };
+    console.log(data?.image)
 
     mutate(modifiedData);
   };
@@ -148,6 +152,7 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
         control={control}
         errors={errors}
         defImg={restaurantData?.image}
+        token={session?.data?.user?.access_token}
       />
 
 
