@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import restaurantImage from '@/public/assets/restaurant.png'
 import { useGetAllRestaurants } from "@/hooks/restaurantsQueries";
 
 
@@ -11,16 +12,18 @@ const RestaurantCards = () => {
     const { data: restaurants, isPending } = useGetAllRestaurants(page);
     console.log(restaurants)
     return (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <section className="mt-10 mx-[20px] md:mx-[40px] 2xl:mx-[80px] max-md:flex-wrap">
+
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mt-14">
             {restaurants?.content.map((restaurant) => (
                 <Card key={restaurant.restaurantId} className="hover:shadow-lg transition-shadow">
                     <CardHeader>
                         <Image
-                            src={''}
+                            src={restaurantImage}
                             alt={restaurant.name}
                             width={400}
                             height={200}
-                            className="rounded-t-md object-cover"
+                            className="rounded-t-md object-cover h-[300px]"
                         />
                     </CardHeader>
                     <CardContent>
@@ -35,6 +38,7 @@ const RestaurantCards = () => {
                 </Card>
             ))}
         </div>
+    </section>
     );
 };
 
