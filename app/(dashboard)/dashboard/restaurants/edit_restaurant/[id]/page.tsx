@@ -18,9 +18,9 @@ const page = ({ params: { id } }: EditProps) => {
         <h1 className="text-[1.6rem] vsm:text-[2rem] font-bold opacity-70">
           Edit Restaurant
         </h1>
-        <Link href={"/dashboard/users"}>
+        <Link href={"/dashboard/restaurants"}>
           <Button
-            className="flex items-center justify-start gap-x-1 text-background bg-primary hover:bg-primary/90"
+            className="flex items-center justify-start gap-x-1 text-background bg-primary hover:bg-primary/80"
             variant={"secondary"}
           >
             <ChevronLeft className="size-6" />

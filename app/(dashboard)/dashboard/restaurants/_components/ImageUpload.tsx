@@ -74,9 +74,8 @@ const ImageUpload = ({ control, errors, defImg }: ImageUploadProps) => {
       <div className="flex vsm:flex-row flex-col gap-y-2 vsm:items-center gap-x-10">
         <Button
           onClick={() => imgRef?.current?.click()}
-          variant={"secondary"}
           type="button"
-          className="text-background w-fit"
+          className="text-background w-fit bg-gray-900 hover:bg-gray-700"
         >
           <ImgIcon className="size-6" /> &nbsp;&nbsp;Select Image
         </Button>

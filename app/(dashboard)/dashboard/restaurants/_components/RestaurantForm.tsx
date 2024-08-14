@@ -109,7 +109,7 @@ const RestaurantForm = () => {
 
 
             {/* Form Submission */}
-            <Button type="submit" className="px-5 py-2.5 my-auto text-[16px] w-[200px] h-[40px] font-medium text-white rounded-md bg-accent border-r-0 ">
+            <Button type="submit" className="px-5 py-2.5 my-auto text-[16px] w-[200px] h-[40px] font-medium text-white rounded-md  border-r-0 ">
                 {isPending ? (
                     <div className="flex items-center gap-2">
                         <Loader2 className="size-5 animate-spin" />

@@ -10,10 +10,13 @@ const page = () => {
                 <h1 className="font-semibold text-3xl xvsm:pb-10 opacity-80">
                     Add Restaurant
                 </h1>
-                <Link href={"/dashboard/Restaurants"} className='xvsm:p-0 pb-6 m-0'>
-                    <Button className="px-5 py-2.5 my-auto text-[16px] w-[160px] h-[40px] font-medium text-white rounded-md bg-accent border-r-0 !p-0">
-                        <ChevronLeft className="size-5" />
-                        &nbsp; Go Back
+                <Link href={"/dashboard/restaurants"}>
+                    <Button
+                        className="flex items-center justify-start gap-x-1 text-background bg-primary hover:bg-primary/80"
+                        variant={"secondary"}
+                    >
+                        <ChevronLeft className="size-6" />
+                        <p className="pr-2 text-base">Back</p>
                     </Button>
                 </Link>
             </div>
