@@ -85,7 +85,7 @@ const EditForm: React.FC<EditProps> = ({ id, fromProfilePage = false }) => {
       if (data.response.status === 422) {
         toast.error("Please fill all the required fields.");
       } else {
-        toast.error("Failed to update Instructor, Something went wrong.");
+        toast.error("Failed to update user, Something went wrong.");
       }
     },
   });

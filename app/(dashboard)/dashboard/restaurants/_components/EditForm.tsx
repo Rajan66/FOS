@@ -80,7 +80,7 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
       if (data.response.status === 422) {
         toast.error("Please fill all the required fields.");
       } else {
-        toast.error("Failed to update Instructor, Something went wrong.");
+        toast.error("Failed to update restaurant, Something went wrong.");
       }
     },
   });
