@@ -3,7 +3,7 @@
 import InputBox from "@/components/InputBox";
 import { Button } from "@/components/ui/button";
 import { useGetUserDetails } from "@/hooks/usersQueries";
-import { TUser, userSchema } from "@/schemas/profileSchema";
+import { TUser, UserSchema } from "@/schemas/profileSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
@@ -26,7 +26,7 @@ const UserForm = ({ id, token }: Props) => {
     formState: { errors },
     setValue,
   } = useForm<TUser>({
-    resolver: zodResolver(userSchema),
+    resolver: zodResolver(UserSchema),
     defaultValues: {
       firstName: data?.firstName,
       lastName: data?.lastName,

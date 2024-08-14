@@ -124,7 +124,7 @@ const RestaurantsTable = () => {
                     scope="row"
                     className="flex justify-end whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white gap-2"
                   >
-                
+
                     <Link href={`/dashboard/restaurants/edit_restaurant/${restaurantId}`}>
                       <Button
                         variant={"secondary"}

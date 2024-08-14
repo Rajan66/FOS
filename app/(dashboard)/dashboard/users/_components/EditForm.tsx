@@ -174,16 +174,15 @@ const EditForm: React.FC<EditProps> = ({ id, fromProfilePage = false }) => {
 
 
       {/* Form Submission */}
-      <Button type="submit" className="vsm:text-lg py-7">
-        {Updating ? (
+      {/* Form Submission */}
+      <Button type="submit" className="px-5 py-2.5 my-auto text-[16px] w-[200px] h-[40px] font-medium  rounded-md  border-r-0 ">
+        {isPending ? (
           <div className="flex items-center gap-2">
             <Loader2 className="size-5 animate-spin" />
             <p>Editing..</p>
           </div>
         ) : (
-          <>
-            {fromProfilePage ? "Update User Details" : "Edit User"}
-          </>
+          "Edit User"
         )}
       </Button>
     </form>

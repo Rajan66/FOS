@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import ImageUpload from "./ImageUpload";
 import { useRouter } from "next/navigation";
 import { useGetRestaurant } from "@/hooks/restaurantsQueries";
-import { updateRestaurant} from "@/apicalls/restaurant";
+import { updateRestaurant } from "@/apicalls/restaurant";
 import { RestaurantSchema, TRestaurant } from "@/schemas/restaurantSchema";
 
 type EditProps = {
@@ -26,8 +26,6 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
   const queryClient = useQueryClient();
   const session = useSession()
   const { data: restaurantData, isPending } = useGetRestaurant(Number(id));
-
-  console.log(restaurantData)
 
   const {
     control,
@@ -65,11 +63,11 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
     mutationFn: updateRestaurant,
     onSettled(data: any) {
       if (data.status === 200) {
-          queryClient.invalidateQueries({ queryKey: ["restaurant", id] });
-          queryClient.invalidateQueries({ queryKey: ["restaurants"] });
-          toast.success("Restaurant Updated Successfully");
-          reset();
-          router.push("/dashboard/restaurants");
+        queryClient.invalidateQueries({ queryKey: ["restaurant", id] });
+        queryClient.invalidateQueries({ queryKey: ["restaurants"] });
+        toast.success("Restaurant Updated Successfully");
+        reset();
+        router.push("/dashboard/restaurants");
       }
 
       if (data.response.status === 422) {
@@ -81,6 +79,7 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
   });
 
   const onSubmit = (data: TRestaurant) => {
+    console.log(data)
     const modifiedData = {
       id: Number(id),
       data: {
@@ -144,26 +143,23 @@ const EditForm: React.FC<EditProps> = ({ id }) => {
         label="Restaurant's Contact *"
       />
 
-      {/* Optional Fields  */}
 
       <ImageUpload
         control={control}
         errors={errors}
-        defImg={restaurantData?.image?.split("/")[1]}
+        defImg={restaurantData?.image}
       />
 
 
       {/* Form Submission */}
-      <Button type="submit" className="vsm:text-lg py-7">
-        {Updating ? (
+      <Button type="submit" className="px-5 py-2.5 my-auto text-[16px] w-[200px] h-[40px] font-medium  rounded-md  border-r-0 ">
+        {isPending ? (
           <div className="flex items-center gap-2">
             <Loader2 className="size-5 animate-spin" />
             <p>Editing..</p>
           </div>
         ) : (
-          <>
-             {"Edit restaurant"}
-          </>
+          "Edit Restaurant"
         )}
       </Button>
     </form>
