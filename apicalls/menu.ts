@@ -5,21 +5,23 @@ import {
   PutRequest,
 } from "@/lib/axios/client/axios";
 //   restaurants/2302/menus/4
-export const createMenu = async (
-  data: {
-    restaurantId: number;
-    menuId: number;
-    body: any;
-  },
-  token: string
-) => {
+export const createMenu = async (data: {
+  restaurantId: number | undefined;
+  body: {
+    name: string;
+    restaurant: {
+      restaurantId: number | undefined;
+    };
+  };
+  token: string | undefined;
+}) => {
   try {
     const response = await PostRequest(
-      `/api/restaurants/${data.restaurantId}/menus/${data.menuId}`, // change how the id is obtained when menu is created
-      { data: data },
+      `/api/restaurants/${data.restaurantId}/menus`, // change how the id is obtained when menu is created
+      { ...data.body },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${data.token}`,
         },
       }
     );
@@ -65,7 +67,7 @@ export const getMenuDetail = async (id: number, token: string | undefined) => {
   }
 };
 export const getRestaurantMenus = async (
-  restaurantId: number,
+  restaurantId: number | undefined,
   token: string | undefined,
   page: number | 1
 ) => {

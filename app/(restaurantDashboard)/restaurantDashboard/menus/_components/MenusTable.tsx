@@ -7,14 +7,16 @@ import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useGetRestaurantMenus } from "@/hooks/menusQueries";
+import { useGetRestaurantUser } from "@/hooks/restaurantsQueries";
 
 
 const MenusTable = () => {
   const session = useSession();
   const [page, setPage] = useState<number>(1);
 
-  console.log(session?.data?.user?.email)
-  const { data: menuData, isPending } = useGetRestaurantMenus(1, session?.data?.user?.access_token, page);
+  const { data: restaurantData, isPending: Loading } = useGetRestaurantUser(session?.data?.user.id, session?.data?.user?.access_token);
+  console.log(restaurantData)
+  const { data: menuData, isPending } = useGetRestaurantMenus(restaurantData?.restaurantId, session?.data?.user?.access_token, page);
 
   console.log(menuData)
 

@@ -2,7 +2,7 @@ import { getMenuDetail, getRestaurantMenus } from "@/apicalls/menu";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export const useGetRestaurantMenus = (
-  restaurantId: number,
+  restaurantId: number | undefined,
   token: string | undefined,
   page: number | 1
 ) => {
@@ -17,7 +17,7 @@ export const useGetRestaurantMenus = (
   return { data, isPending };
 };
 
-export const useGetRestaurant = (id: number, token: string | undefined) => {
+export const useGetMenuDetail = (id: number, token: string | undefined) => {
   const { data, isPending } = useQuery<Menu>({
     queryKey: ["menu", id],
     queryFn: () => getMenuDetail(id, token),

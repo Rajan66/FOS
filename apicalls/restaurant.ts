@@ -93,3 +93,23 @@ export const deleteRestaurant = async (data: {
     throw new Error(error?.message);
   }
 };
+
+export const getRestUser = async (data: {
+  id: number | undefined;
+  token: string | undefined;
+}) => {
+  try {
+    const response = await GetRequest(
+      `/api/restaurants/user/${data.id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error?.message);
+  }
+};

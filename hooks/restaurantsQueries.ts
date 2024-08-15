@@ -1,4 +1,8 @@
-import { getAllRestaurants, getRestaurantDetail } from "@/apicalls/restaurant";
+import {
+  getAllRestaurants,
+  getRestUser,
+  getRestaurantDetail,
+} from "@/apicalls/restaurant";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export const useGetAllRestaurants = (page: number | 1) => {
@@ -14,6 +18,18 @@ export const useGetRestaurant = (id: number) => {
   const { data, isPending } = useQuery<Restaurant>({
     queryKey: ["restaurant", id],
     queryFn: () => getRestaurantDetail(id),
+  });
+
+  return { data, isPending };
+};
+
+export const useGetRestaurantUser = (
+  id: number | undefined,
+  token: string | undefined
+) => {
+  const { data, isPending } = useQuery<Restaurant>({
+    queryKey: ["restUser", id],
+    queryFn: () => getRestUser({ id, token }),
   });
 
   return { data, isPending };

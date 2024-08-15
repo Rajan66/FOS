@@ -11,7 +11,7 @@ const page = () => {
         <h1 className="font-semibold text-3xl xvsm:pb-10 opacity-80">
           Menus and Foods
         </h1>
-        <Link href={"/dashboard/restaurants/add_restaurant"} className='xvsm:p-0 pb-6 m-0'>
+        <Link href={"/restaurantDashboard/menus/add_menu"} className='xvsm:p-0 pb-6 m-0'>
           <Button className="px-5 py-2.5 my-auto text-[16px] bg-primary hover:bg-primary/80 font-medium text-white rounded-md  border-r-0">
             <PlusCircle className="size-5" />
             &nbsp; Add Menu and Foods

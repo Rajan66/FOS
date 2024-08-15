@@ -5,20 +5,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import InputBox from "@/components/InputBox";
 import { Button } from "@/components/ui/button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createRestaurant } from "@/apicalls/restaurant";
+import { createMenu } from "@/apicalls/menu";
 import { Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { TRestaurant, RestaurantSchema } from "@/schemas/restaurantSchema";
-import TextAreaBox from "@/components/TextAreaBox";
-import { TMenu } from "@/schemas/menuSchema";
+import { TMenu, MenuSchema } from "@/schemas/menuSchema";
+import { useGetRestaurantUser } from "@/hooks/restaurantsQueries";
 
 
-const RestaurantForm = () => {
+const MenuForm = () => {
     const router = useRouter();
     const queryClient = useQueryClient();
     const session = useSession();
+
+    const { data: restaurantData, isPending: Loading } = useGetRestaurantUser(session?.data?.user.id, session?.data?.user?.access_token);
 
 
     const {
@@ -27,20 +28,20 @@ const RestaurantForm = () => {
         control,
         formState: { errors },
         reset,
-    } = useForm<TRestaurant>({
-        resolver: zodResolver(RestaurantSchema),
+    } = useForm<TMenu>({
+        resolver: zodResolver(MenuSchema),
         mode: "onChange",
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: createRestaurant,
+        mutationFn: createMenu,
         onSettled(apiData: any) {
             console.log(apiData)
             if (apiData?.status === 201) {
-                queryClient.invalidateQueries({ queryKey: ["restaurants"] });
-                toast.success("Restaurant Created Successfully");
+                queryClient.invalidateQueries({ queryKey: ["menus"] });
+                toast.success("Menu Created Successfully");
                 reset();
-                router.push("/dashboard/restaurants");
+                router.push("/restaurantDashboard/menus");
             }
             if (apiData.response.status === 422) {
                 toast.error("Please fill all the required Fields");
@@ -48,18 +49,25 @@ const RestaurantForm = () => {
         },
     });
 
-
-    const onSubmit = async (data: TRestaurant) => {
-
-        console.log(data)
-        const menuData = {
-            data: data,
-            token: session?.data?.user?.access_token
+    const onSubmit = async (data: TMenu) => {
+        const menuBody = {
+            name: data.name,
+            restaurant: {
+                restaurantId: restaurantData?.restaurantId,
+            }
         };
-        console.log(menuData)
-        mutate(menuData);
-    }
 
+        const token = session?.data?.user?.access_token;
+
+        const menuData = {
+            restaurantId: restaurantData?.restaurantId,
+            body: menuBody,
+            token: token,
+        };
+
+        console.log(menuData);
+        mutate(menuData);
+    };
 
     return (
         <form
@@ -85,11 +93,11 @@ const RestaurantForm = () => {
                         <p>Creating..</p>
                     </div>
                 ) : (
-                    "Create Restaurant"
+                    "Create Menu"
                 )}
             </Button>
         </form>
     );
 };
 
-export default RestaurantForm;
+export default MenuForm;
