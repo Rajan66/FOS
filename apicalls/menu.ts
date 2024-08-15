@@ -89,8 +89,8 @@ export const getRestaurantMenus = async (
 
 export const updateMenu = async (
   data: {
-    restaurantId: number;
-    menuId: number;
+    restaurantId: number | undefined;
+    menuId: number | undefined;
     body: any;
   },
   token: string
