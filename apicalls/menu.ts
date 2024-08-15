@@ -23,7 +23,7 @@ export const createMenu = async (
         },
       }
     );
-    return response.data;
+    return response;
   } catch (error: any) {
     throw new Error(error?.message);
   }
@@ -46,12 +46,12 @@ export const getAllMenus = async (token: string) => {
   }
 };
 
-export const getMenuDetail = async (id: number, token: string) => {
+export const getMenuDetail = async (id: number, token: string | undefined) => {
   try {
     const response = await GetRequest(
       `/api/menus/${id}`,
       {
-        MenuId: id,
+        // MenuId: id,
       },
       {
         headers: {
@@ -64,23 +64,22 @@ export const getMenuDetail = async (id: number, token: string) => {
     throw new Error(error?.message);
   }
 };
-export const getRestaurantMenuDetail = async (
+export const getRestaurantMenus = async (
+  page: number | 1,
   restaurantId: number,
-  token: string
+  token: string | undefined
 ) => {
   try {
     const response = await GetRequest(
-      `/api/menus/${restaurantId}`,
-      {
-        restaurantId: restaurantId,
-      },
+      `/api/restaurants/${restaurantId}/menus`,
+      {},
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-    return response.data;
+    return response;
   } catch (error: any) {
     throw new Error(error?.message);
   }

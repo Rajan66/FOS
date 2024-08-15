@@ -7,7 +7,7 @@ import UsersTable from './_components/UsersTable'
 
 const page = () => {
   return (
-    <div>
+    <AdminRoute>
       <div className="flex justify-between flex-col xvsm:flex-row gap-y-3">
         <h1 className="font-semibold text-3xl xvsm:pb-10 opacity-80">
           Users
@@ -20,7 +20,7 @@ const page = () => {
         </Link>
       </div>
       <UsersTable />
-    </div>
+    </AdminRoute>
   )
 }
 
