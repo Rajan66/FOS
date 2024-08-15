@@ -68,18 +68,14 @@ export const getMenuDetail = async (id: number, token: string | undefined) => {
 };
 export const getRestaurantMenus = async (
   restaurantId: number | undefined,
-  token: string | undefined,
+  // token: string | undefined,
   page: number | 1
 ) => {
   try {
     const response = await GetRequest(
       `/api/restaurants/${restaurantId}/menus`,
       { page: page },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      {}
     );
     return response;
   } catch (error: any) {

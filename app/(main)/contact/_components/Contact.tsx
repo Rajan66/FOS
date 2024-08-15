@@ -32,7 +32,7 @@ const Contact = () => {
             </div>
             <div className="flex flex-col">
               <p className="text-primary/80 font-semibold text-base">Call Us</p>
-              <h3 className="text-lg font-bold">Kathmandu, Nepal</h3>
+              <h3 className="text-lg font-bold">(977) 9810350199</h3>
             </div>
           </div>
         </div>

@@ -3,9 +3,12 @@ import Image from 'next/image'
 import React from 'react'
 import restaurant from '@/public/assets/restaurant.png'
 import { useGetAllRestaurants } from '@/hooks/restaurantsQueries';
+import Loading from '../Loading';
 
 const Restaurants = () => {
     const { data: restaurantData, isPending } = useGetAllRestaurants(1);
+
+    if(isPending) return <Loading/>
 
     return (
         // TODO i think mt-10 is better for all screens than mt-20?

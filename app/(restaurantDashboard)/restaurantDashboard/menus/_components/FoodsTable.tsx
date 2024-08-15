@@ -31,7 +31,7 @@ const FoodsTable = () => {
     const { id: id } = useParams();
 
     console.log(id)
-    const { data: foodData, isPending } = useGetAllMenuFoods(Number(id), session?.data?.user?.access_token, page);
+    const { data: foodData, isPending } = useGetAllMenuFoods(Number(id), page);
 
 
     const { mutate, isPending: Deleting } = useMutation({

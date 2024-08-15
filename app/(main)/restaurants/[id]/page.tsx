@@ -1,17 +1,39 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import MenuBar from './_components/MenuBar';
-import { categories } from './list/categories';
+import MenuSection from './_components/MenuSection';
 import { useParams } from 'next/navigation';
 import { useGetRestaurant } from '@/hooks/restaurantsQueries';
+import { useGetRestaurantMenus } from '@/hooks/menusQueries';
+import { useGetAllMenuFoods } from '@/hooks/foodQueries';
 
-const page = () => {
-    const { id: id } = useParams();
-    const { data: restaurantData, isPending } = useGetRestaurant(Number(id));
-    const [selectedCategory, setSelectedCategory] = useState('Burgers');
+const Page = () => {
+    const { id } = useParams();
+    const [page, setPage] = useState<number>(1);
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-    const filteredItems = categories.find(category => category.name === selectedCategory)?.items || [];
+    const { data: restaurantData } = useGetRestaurant(Number(id));
+    const { data: rawMenuData } = useGetRestaurantMenus(Number(id), page);
+    const menuData = rawMenuData?.content || [];
+
+    const selectedMenuId = menuData.find(menu => menu.name === selectedCategory)?.menuId;
+    const { data: foodData, isPending, refetch } = useGetAllMenuFoods(selectedMenuId, page);
+    const filteredItems = foodData?.content || [];
+
+    // Set default category when menuData is loaded or updated
+    useEffect(() => {
+        if (menuData.length > 0 && !selectedCategory) {
+            setSelectedCategory(menuData[0].name);
+        }
+    }, [menuData]);
+
+    // Refetch food data when selectedMenuId or page changes
+    useEffect(() => {
+        if (selectedMenuId) {
+            refetch();
+        }
+    }, [selectedMenuId, page, refetch]);
 
     return (
         <main className="bg-gray-50 min-h-screen">
@@ -27,10 +49,8 @@ const page = () => {
                 <div className="absolute inset-0 bg-black opacity-60"></div>
                 <div className="absolute bottom-0 left-0 p-6 text-white">
                     <h1 className="text-4xl font-bold">{restaurantData?.name}</h1>
-                    {/* <p className="mt-2">{restaurantData?.cuisine.join(' • ')}</p> */}
                     <p className="mt-2">{restaurantData?.cuisine}</p>
                     <p className="mt-2">{restaurantData?.address}</p>
-                    {/* <p className="mt-2">Rating: {restaurant.rating} ⭐ ({restaurant.reviews})</p> */}
                     <div className="flex mt-4 space-x-4">
                         <button className="bg-red-500 px-4 py-2 rounded-lg">Delivery</button>
                         <button className="bg-gray-500 px-4 py-2 rounded-lg">Pickup</button>
@@ -40,36 +60,20 @@ const page = () => {
 
             {/* Menu Bar Section */}
             <MenuBar
-                categories={categories.map(category => category.name)}
+                categories={menuData.map(menu => menu.name)}
                 selectedCategory={selectedCategory}
                 onSelectCategory={setSelectedCategory}
             />
 
             {/* Menu Section */}
-            <div className="px-6 py-10">
-                <h2 className="text-2xl font-semibold mb-4">{selectedCategory}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {filteredItems.map((item, idx) => (
-                        <div key={idx} className="flex items-center bg-white p-4 rounded-lg shadow-md">
-                            <Image
-                                src={item.imageUrl}
-                                alt={item.name}
-                                width={100}
-                                height={100}
-                                className="rounded-lg"
-                            />
-                            <div className="ml-4">
-                                <h3 className="text-lg font-semibold">{item.name}</h3>
-                                <p className="text-gray-600 mt-1">{item.description}</p>
-                                <p className="text-gray-800 font-bold mt-2">{item.price}</p>
-                            </div>
-                            <button className="ml-auto bg-yellow-500 text-white px-3 py-1 rounded-lg">+</button>
-                        </div>
-                    ))}
-                </div>
-            </div>
+            {selectedCategory && (
+                <MenuSection
+                    selectedCategory={selectedCategory}
+                    foodItems={filteredItems}
+                />
+            )}
         </main>
     );
 };
 
-export default page;
+export default Page;

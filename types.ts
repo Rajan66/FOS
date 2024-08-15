@@ -20,7 +20,7 @@ type Restaurant = {
 };
 
 type Menu = {
-  id: number;
+  menuId: number;
   restaurantId: number;
   name: string;
 };

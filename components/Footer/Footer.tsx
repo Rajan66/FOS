@@ -14,9 +14,7 @@ const Footer = () => {
             BiteBuddy
           </h2>
           <p className="mt-[19px] text-lg font-light leading-7 text-black ">
-            Lorem ipsum dolor sit amet consectetur. Nibh rhoncus tincidunt in
-            posuere morbi in ac fames et. Duis lacus scelerisque in massa
-            dictumst nibh phasellus. Malesuada nisl in eget curabitur interdum.
+          Discover your favorite meals and order from the best restaurants around you, all in one place. At BiteBuddy, we bring convenience and flavor to your doorstep, offering a seamless food ordering experience tailored just for you.
           </p>
           <div className="flex gap-2.5 mt-11 max-md:mt-10">
             {socialLinks.map((item, index) => (

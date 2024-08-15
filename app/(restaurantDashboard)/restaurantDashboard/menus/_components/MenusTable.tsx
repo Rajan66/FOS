@@ -15,7 +15,7 @@ const MenusTable = () => {
   const [page, setPage] = useState<number>(1);
 
   const { data: restaurantData, isPending: Loading } = useGetRestaurantUser(session?.data?.user.id, session?.data?.user?.access_token);
-  const { data: menuData, isPending } = useGetRestaurantMenus(restaurantData?.restaurantId, session?.data?.user?.access_token, page);
+  const { data: menuData, isPending } = useGetRestaurantMenus(restaurantData?.restaurantId, page);
 
 
   return (

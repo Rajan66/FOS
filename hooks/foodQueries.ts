@@ -3,15 +3,14 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export const useGetAllMenuFoods = (
   id: number | undefined,
-  token: string | undefined,
   pageParam: number | 1
 ) => {
-  const { data, isPending } = useQuery<PaginatedUsersData>({
+  const { data, isPending, refetch } = useQuery<PaginatedFoodsData>({
     queryKey: ["foods", pageParam],
-    queryFn: () => getAllMenuFoods(id, token, pageParam),
+    queryFn: () => getAllMenuFoods(id, pageParam),
     placeholderData: keepPreviousData,
   });
-  return { data, isPending };
+  return { data, isPending, refetch };
 };
 
 export const useGetFoodDetail = (id: number, token: string | undefined) => {

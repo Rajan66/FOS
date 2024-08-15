@@ -3,13 +3,13 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export const useGetRestaurantMenus = (
   restaurantId: number | undefined,
-  token: string | undefined,
+  // token: string | undefined,
   page: number | 1
 ) => {
   const { data, isPending } = useQuery<PaginatedMenusData>({
     queryKey: ["menus", page],
     queryFn: () =>
-      getRestaurantMenus(restaurantId, token, page).then(
+      getRestaurantMenus(restaurantId, page).then(
         (response) => response.data
       ),
   });

@@ -39,7 +39,7 @@ const Food = () => {
                                         alt='food'
                                         width={150}
                                         height={150}
-                                        className='w-[130px] h-[120px] border rounded-full bg-gray-50 transition-transform duration-300 ease-in-out hover:scale-110'
+                                        className='w-[130px] h-[120px] border rounded-full bg-gray-50 transition-transform duration-300 ease-in-out hover:scale-110 object-cover'
                                     />
                                     <span className='text-lg font-semibold opacity-70'>{food.name}</span>
                                 </div>

@@ -38,7 +38,7 @@ const EditFoodForm = () => {
         mutationFn: addFoodToMenu,
         onSettled(apiData: any) {
             console.log(apiData)
-            if (apiData?.status === 201) {
+            if (apiData?.status === 204) {
                 queryClient.invalidateQueries({ queryKey: ["foods"] });
                 toast.success("Food Created Successfully");
                 reset();
