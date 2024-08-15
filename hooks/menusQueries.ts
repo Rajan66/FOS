@@ -8,12 +8,12 @@ export const useGetRestaurantMenus = (
 ) => {
   const { data, isPending } = useQuery<PaginatedMenusData>({
     queryKey: ["menus", page],
-    queryFn: async () => {
-      const response = await getRestaurantMenus(page, restaurantId, token);
-      return response.data;
-    },
-    placeholderData: keepPreviousData,
+    queryFn: () =>
+      getRestaurantMenus(restaurantId, token, page).then(
+        (response) => response.data
+      ),
   });
+
   return { data, isPending };
 };
 

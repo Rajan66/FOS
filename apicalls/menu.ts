@@ -65,14 +65,14 @@ export const getMenuDetail = async (id: number, token: string | undefined) => {
   }
 };
 export const getRestaurantMenus = async (
-  page: number | 1,
   restaurantId: number,
-  token: string | undefined
+  token: string | undefined,
+  page: number | 1
 ) => {
   try {
     const response = await GetRequest(
       `/api/restaurants/${restaurantId}/menus`,
-      {},
+      { page: page },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -109,15 +109,15 @@ export const updateMenu = async (
   }
 };
 
-export const deleteMenu = async (id: number, token: string) => {
-  try {
-    const response = await DeleteRequest(`/api/menus/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error: any) {
-    throw new Error(error?.message);
-  }
-};
+// export const deleteMenu = async (id: number, token: string) => {
+//   try {
+//     const response = await DeleteRequest(`/api/menus/${id}`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     return response.data;
+//   } catch (error: any) {
+//     throw new Error(error?.message);
+//   }
+// };

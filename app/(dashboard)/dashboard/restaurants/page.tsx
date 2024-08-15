@@ -7,7 +7,7 @@ import AdminRoute from '../_components/AdminRoute'
 
 const page = () => {
   return (
-    <AdminRoute>
+    <div>
       <div className="flex justify-between flex-col xvsm:flex-row gap-y-3">
         <h1 className="font-semibold text-3xl xvsm:pb-10 opacity-80">
           Restaurants
@@ -20,7 +20,7 @@ const page = () => {
         </Link>
       </div>
       <RestaurantsTable />
-    </AdminRoute>
+    </div>
   )
 }
 

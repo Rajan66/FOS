@@ -22,8 +22,7 @@ const AdminRoute = ({ children }: any) => {
         return <span className='text-blue-400'><Loading /></span>;
     }
     if (!session || session.user.role !== 'ADMIN') {
-        // router.push('/');
-        return <div>Page not Found</div>;    
+        return null; 
     }
 
     return <>{children}</>;

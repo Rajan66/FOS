@@ -3,11 +3,10 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { PlusCircle } from 'lucide-react'
 import MenusTable from './_components/MenusTable'
-import RestaurantRoute from '../_components/RestaurantRoute'
 
 const page = () => {
   return (
-    <RestaurantRoute>
+    <div>
       <div className="flex justify-between flex-col xvsm:flex-row gap-y-3">
         <h1 className="font-semibold text-3xl xvsm:pb-10 opacity-80">
           Menus and Foods
@@ -20,7 +19,7 @@ const page = () => {
         </Link>
       </div>
       <MenusTable />
-    </RestaurantRoute>
+    </div>
   )
 }
 

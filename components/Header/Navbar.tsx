@@ -55,7 +55,7 @@ const Navbar = () => {
           <>
             {userRole === 'ADMIN' || userRole === 'RESTAURANT' ? (
               <Link
-                href="/dashboard"
+                href={userRole === 'RESTAURANT' ? "/restaurantDashboard" : "/dashboard"}
                 className="hidden mmd:flex justify-center items-center"
               >
                 <Button className="px-5 py-2.5 my-auto text-base h-[45px] font-medium text-white uppercase bg-primary border-r-0 rounded-sm hover:bg-primary/80">

@@ -13,7 +13,6 @@ const RestaurantRoute = ({ children }: any) => {
         if (status === 'loading') return;
 
         if (!session || session.user.role !== 'RESTAURANT') {
-
             router.push('/');
         }
     }, [status]);
@@ -22,7 +21,7 @@ const RestaurantRoute = ({ children }: any) => {
         return <span className='text-blue-400'><Loading /></span>;
     }
     if (!session || session.user.role !== 'RESTAURANT') {
-        return <div>Page not Found</div>;
+        return null;
     }
 
     return <>{children}</>;
