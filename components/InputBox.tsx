@@ -47,7 +47,7 @@ function InputBox<T>({
         id={id}
         value={value}
         defaultValue={defVal}
-        type={type !== "" ? type : "text"}
+        type={type === "number" ? "number" : type || "text"}
         maxLength={maxLength && maxLength}
         name={name as string}
         placeholder={placeholder}

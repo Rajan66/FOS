@@ -12,6 +12,10 @@ export const sidebarLinks = [
     link: "/restaurantDashboard/orders",
   },
   {
+    name: "Account",
+    link: "/restaurantDashboard/account",
+  },
+  {
     name: "Profile",
     link: "/restaurantDashboard/profile",
   },

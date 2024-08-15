@@ -15,7 +15,7 @@ export const useGetAllMenuFoods = (
 };
 
 export const useGetFoodDetail = (id: number, token: string | undefined) => {
-  const { data, isPending } = useQuery<UserDetails>({
+  const { data, isPending } = useQuery<Food>({
     queryKey: ["food", id],
     queryFn: () => getFoodDetail(id, token),
   });

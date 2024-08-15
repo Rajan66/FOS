@@ -15,10 +15,8 @@ const MenusTable = () => {
   const [page, setPage] = useState<number>(1);
 
   const { data: restaurantData, isPending: Loading } = useGetRestaurantUser(session?.data?.user.id, session?.data?.user?.access_token);
-  console.log(restaurantData)
   const { data: menuData, isPending } = useGetRestaurantMenus(restaurantData?.restaurantId, session?.data?.user?.access_token, page);
 
-  console.log(menuData)
 
   return (
     <div className="w-full relative overflow-hidden rounded-md shadow border border-input mb-10">

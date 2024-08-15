@@ -15,7 +15,7 @@ const Restaurants = () => {
                 {restaurantData?.content.slice(0, 8).map((item, index) => (
                     <div className='flex flex-col items-center justify-center gap-5' key={index}>
                         <Image
-                            src={restaurant}
+                            src={item?.image || restaurant}
                             alt='Restaurant'
                             width={300}
                             height={300}

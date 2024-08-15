@@ -34,7 +34,7 @@ const page = ({ params: { id } }: EditProps) => {
         <h1 className="font-semibold text-3xl opacity-80">
           Menu Items
         </h1>
-        <Link href={"/restaurantDashboard/menus/add_menu"} className='xvsm:p-0 pb-6 m-0'>
+        <Link href={`/restaurantDashboard/menus/${id}/add_food`} className='xvsm:p-0 pb-6 m-0'>
           <Button className="px-5 py-2.5 my-auto text-[16px] bg-primary hover:bg-primary/80 font-medium text-white rounded-md  border-r-0">
             <PlusCircle className="size-5" />
             &nbsp; Add Food

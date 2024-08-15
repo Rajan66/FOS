@@ -38,7 +38,7 @@ const FoodsTable = () => {
         mutationFn: deleteFood,
         onSuccess() {
             toast.success("User Deleted Successfully");
-            queryClient.invalidateQueries({ queryKey: ["users", page] });
+            queryClient.invalidateQueries({ queryKey: ["foods", page] });
         },
         onError() {
             toast.error("Something went wrong, Try again Later");

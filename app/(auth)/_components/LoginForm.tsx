@@ -120,6 +120,20 @@ const LoginForm = () => {
             "Login"
           )}
         </Button>
+
+        <div
+          className="flex justify-center space-x-2 text-gray-600 text-sm"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <p>Don't have an account?</p>
+          <Link
+            href={"/signup"}
+            className="text-red-500 hover:underline transition"
+          >
+            Register Instead
+          </Link>
+        </div>
       </div>
     </form>
   );

@@ -1,3 +1,4 @@
+"use client"
 import { Sheet, SheetClose, SheetContent, SheetFooter, SheetTrigger } from "@/components/ui/sheet";
 import { LogOut, Menu } from "lucide-react";
 import Image from "next/image";
@@ -6,10 +7,12 @@ import logo from "@/public/assets/logo.png";
 import { sidebarLinks } from "./list/sidebarLinks";
 import { auth } from "@/auth";
 import LogoutBtn from "@/components/LogoutBtn";
+import { useGetRestaurantUser } from "@/hooks/restaurantsQueries";
+import { useSession } from "next-auth/react";
 
-const DashboardMenu = async () => {
-  const session = await auth();
-  const userRole = session?.user?.role;
+const DashboardMenu = () => {
+  const session = useSession();
+  const { data, isPending } = useGetRestaurantUser(session?.data?.user.id, session?.data?.user?.access_token);
 
   return (
     <Sheet>
@@ -21,10 +24,11 @@ const DashboardMenu = async () => {
         className="w-[200px] flex flex-col items-center p-0 pt-20 gap-y-5 bg-white"
       >
         <Image
-          src={logo}
+          src={data?.image || logo}
           width={120}
           height={120}
           alt="Restaurant Logo"
+          className=" mr-16 w-[100px] h-[100px] rounded-full object-cover"
         />
 
         <div className="w-full flex flex-col gap-y-0 flex-grow">

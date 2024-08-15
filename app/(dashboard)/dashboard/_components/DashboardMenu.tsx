@@ -9,8 +9,6 @@ import { Button } from "@/components/ui/button";
 import LogoutBtn from "@/components/LogoutBtn";
 
 const DashboardMenu = async () => {
-  const session = await auth();
-  const userRole = session?.user?.role;
 
   return (
     <Sheet>
@@ -25,7 +23,8 @@ const DashboardMenu = async () => {
           src={logo}
           width={120}
           height={120}
-          alt="Dual Brake Car Hire Logo"
+          alt="BiteBuddy Logo"
+          className="w-20 mr-16"
         />
 
         <div className="w-full flex flex-col gap-y-0 flex-grow">

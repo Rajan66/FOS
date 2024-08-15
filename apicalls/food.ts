@@ -1,11 +1,12 @@
 import {
   DeleteRequest,
   GetRequest,
+  PatchRequest,
   PostRequest,
   PutRequest,
 } from "@/lib/axios/client/axios";
 import { headers } from "next/headers";
-
+// /restaurants/{restaurant_id}/menus/{id}
 export const createFood = async (data: any, token: string) => {
   try {
     const response = await PostRequest(
@@ -18,6 +19,28 @@ export const createFood = async (data: any, token: string) => {
       }
     );
     return response.data;
+  } catch (error: any) {
+    throw new Error(error?.message);
+  }
+};
+
+export const addFoodToMenu = async (data: {
+  id: number | undefined;
+  restaurantId: number | undefined;
+  body: any;
+  token: string | undefined;
+}) => {
+  try {
+    const response = await PatchRequest(
+      `/api/restaurants/${data?.restaurantId}/menus/${data?.id}`,
+      { foods: [data.body] },
+      {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      }
+    );
+    return response;
   } catch (error: any) {
     throw new Error(error?.message);
   }
@@ -75,18 +98,22 @@ export const getFoodDetail = async (
   }
 };
 
-export const updateFood = async (id: number, data: any, token: string) => {
+export const updateFood = async (data: {
+  id: number;
+  data: any;
+  token: string | undefined;
+}) => {
   try {
     const response = await PutRequest(
-      `/api/foods/${id}`,
-      { data: data },
+      `/api/foods/${data.id}`,
+      { ...data.data },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${data.token}`,
         },
       }
     );
-    return response.data;
+    return response;
   } catch (error: any) {
     throw new Error(error?.message);
   }

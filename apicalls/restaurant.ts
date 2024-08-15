@@ -57,7 +57,7 @@ export const getRestaurantDetail = async (id: number) => {
 };
 
 export const updateRestaurant = async (data: {
-  id: number;
+  id: number | undefined;
   data: any;
   token: string | undefined;
 }) => {
