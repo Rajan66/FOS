@@ -5,6 +5,8 @@ import restaurantImage from '@/public/assets/restaurant.png';
 import { useGetAllRestaurants } from "@/hooks/restaurantsQueries";
 import Loading from "@/components/Loading";
 import { ChefHat, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const RestaurantCards = ({ searchTerm }: any) => {
     const [page, setPage] = useState<number>(1);
@@ -13,63 +15,63 @@ const RestaurantCards = ({ searchTerm }: any) => {
     const { data: restaurants, isPending } = useGetAllRestaurants(page);
     const loaderRef = useRef<HTMLDivElement | null>(null);
 
-    const restaurantsPerPage = 6;
-    console.log(searchTerm)
-    useEffect(() => {
-        if (restaurants?.content) {
-            setRestaurantList((prevList) => [...prevList, ...restaurants.content]);
-            window.scrollTo(0, 0);
-        }
-    }, [restaurants]);
+    // const restaurantsPerPage = 6;
+    // console.log(searchTerm)
+    // useEffect(() => {
+    //     if (restaurants?.content) {
+    //         setRestaurantList((prevList) => [...prevList, ...restaurants.content]);
+    //         window.scrollTo(0, 0);
+    //     }
+    // }, [restaurants]);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting && page === 1) {
-                    loadMoreRestaurants();
-                }
-            },
-            { threshold: 1 }
-        );
+    // useEffect(() => {
+    //     const observer = new IntersectionObserver(
+    //         (entries) => {
+    //             if (entries[0].isIntersecting && page === 1) {
+    //                 loadMoreRestaurants();
+    //             }
+    //         },
+    //         { threshold: 1 }
+    //     );
 
-        if (loaderRef.current) {
-            observer.observe(loaderRef.current);
-        }
+    //     if (loaderRef.current) {
+    //         observer.observe(loaderRef.current);
+    //     }
 
-        return () => {
-            if (loaderRef.current) {
-                observer.unobserve(loaderRef.current);
-            }
-        };
-    }, [restaurantList, page]);
+    //     return () => {
+    //         if (loaderRef.current) {
+    //             observer.unobserve(loaderRef.current);
+    //         }
+    //     };
+    // }, [restaurantList, page]);
 
-    useEffect(() => {
-        setCurrentIndex(0);
-    }, [searchTerm]);
+    // useEffect(() => {
+    //     setCurrentIndex(0);
+    // }, [searchTerm]);
 
-    const loadMoreRestaurants = () => {
-        if (currentIndex + restaurantsPerPage >= restaurantList.length) {
-            setPage((prevPage) => prevPage + 1);
-        } else {
-            setCurrentIndex((prevIndex) => prevIndex + restaurantsPerPage);
-        }
-    };
+    // const loadMoreRestaurants = () => {
+    //     if (currentIndex + restaurantsPerPage >= restaurantList.length) {
+    //         setPage((prevPage) => prevPage + 1);
+    //     } else {
+    //         setCurrentIndex((prevIndex) => prevIndex + restaurantsPerPage);
+    //     }
+    // };
 
-    const displayedRestaurants = restaurantList
-        .filter(restaurant =>
-            restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            restaurant.cuisine.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .slice(0, currentIndex + restaurantsPerPage);
+    // const displayedRestaurants = restaurantList
+    //     .filter(restaurant =>
+    //         restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    //         restaurant.cuisine.toLowerCase().includes(searchTerm.toLowerCase())
+    //     )
+    //     .slice(0, currentIndex + restaurantsPerPage);
 
     return (
         <section className="mt-10 mx-[20px] md:mx-[40px] 2xl:mx-[80px] max-md:flex-wrap">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mt-14">
-                {displayedRestaurants.map((restaurant) => (
+                {restaurants?.content.map((restaurant) => (
                     <Card key={restaurant.restaurantId} className="hover:shadow-lg transition-shadow">
                         <CardHeader className="p-4">
                             <Image
-                                src={restaurant.image || restaurantImage}
+                                src={restaurant?.image || restaurantImage}
                                 alt={restaurant.name}
                                 width={400}
                                 height={200}
@@ -91,9 +93,11 @@ const RestaurantCards = ({ searchTerm }: any) => {
                             </div>
                         </CardContent>
                         <CardFooter className="p-4">
-                            <button className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition-colors">
-                                View Details
-                            </button>
+                            <Link href={`/restaurants/${restaurant.restaurantId}`}>
+                                <Button className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition-colors">
+                                    View Details
+                                </Button>
+                            </Link>
                         </CardFooter>
                     </Card>
                 ))}

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { PlusCircle } from 'lucide-react'
 import RestaurantsTable from './_components/RestaurantsTable'
+import AdminRoute from '../_components/AdminRoute'
 
 const page = () => {
   return (

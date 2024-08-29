@@ -20,7 +20,7 @@ type Restaurant = {
 };
 
 type Menu = {
-  id: number;
+  menuId: number;
   restaurantId: number;
   name: string;
 };
@@ -30,7 +30,7 @@ type Food = {
   menuId: number;
   name: string;
   category: string;
-  price: number;
+  price: string;
 };
 
 type Order = {

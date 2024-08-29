@@ -80,15 +80,7 @@ const RestaurantForm = () => {
                 desc="enter the restaurant's name"
                 label="Restaurant's Name *"
             />
-            <InputBox<TRestaurant>
-                name="email"
-                id="email"
-                placeholder="Enter Restaurant's Email..."
-                register={register}
-                error={(errors && errors?.email?.message?.toString()) || ""}
-                desc="enter the restaurant's email"
-                label="Restaurant's email *"
-            />
+
 
 
             <InputBox<TRestaurant>
@@ -98,9 +90,18 @@ const RestaurantForm = () => {
                 register={register}
                 error={(errors && errors?.cuisine?.message?.toString()) || ""}
                 desc="enter the restaurant's cuisine"
-                label="Restaurant's cuisine *"
+                label="Restaurant's Cuisine *"
             />
 
+            <InputBox<TRestaurant>
+                name="email"
+                id="email"
+                placeholder="Enter Restaurant's Email..."
+                register={register}
+                error={(errors && errors?.email?.message?.toString()) || ""}
+                desc="enter the restaurant's email"
+                label="Restaurant's Email *"
+            />
             <InputBox<TRestaurant>
                 name="contact"
                 id="contact"
@@ -108,7 +109,7 @@ const RestaurantForm = () => {
                 register={register}
                 error={(errors && errors?.contact?.message?.toString()) || ""}
                 desc="enter the restaurant's contact"
-                label="Restaurant's contact *"
+                label="Restaurant's Contact *"
             />
 
             <TextAreaBox<TRestaurant>
@@ -128,7 +129,7 @@ const RestaurantForm = () => {
                 register={register}
                 error={(errors && errors?.address?.message?.toString()) || ""}
                 desc="enter the restaurant's address"
-                label="Restaurant's Description *"
+                label="Restaurant's Address *"
             />
 
             <InputBox<TRestaurant>

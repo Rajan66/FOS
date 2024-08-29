@@ -3,6 +3,9 @@ import indian from "@/public/assets/indian.png";
 import japanese from "@/public/assets/japanese.png";
 import nepali from "@/public/assets/nepali.png";
 import korean from "@/public/assets/korean.png";
+import mexican from "@/public/assets/mexican.jpg";
+import chinese from "@/public/assets/chinese.jpg";
+import american from "@/public/assets/american.jpg";
 
 export const cuisineItems = [
   {
@@ -26,18 +29,23 @@ export const cuisineItems = [
     image: nepali,
   },
   {
-    name: "Korean",
-    href: "/food/pasta",
-    image: korean,
+    name: "Mexican",
+    href: "/food/mexican",
+    image: mexican,
+  },
+  {
+    name: "American",
+    href: "/food/american",
+    image: american,
+  },
+  {
+    name: "Chinese",
+    href: "/food/chinese",
+    image: chinese,
   },
   {
     name: "Korean",
-    href: "/food/pasta",
-    image: korean,
-  },
-  {
-    name: "Korean",
-    href: "/food/pasta",
+    href: "/food/korean",
     image: korean,
   },
 ];

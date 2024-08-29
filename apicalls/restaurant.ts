@@ -57,7 +57,7 @@ export const getRestaurantDetail = async (id: number) => {
 };
 
 export const updateRestaurant = async (data: {
-  id: number;
+  id: number | undefined;
   data: any;
   token: string | undefined;
 }) => {
@@ -89,6 +89,26 @@ export const deleteRestaurant = async (data: {
       },
     });
     return response;
+  } catch (error: any) {
+    throw new Error(error?.message);
+  }
+};
+
+export const getRestUser = async (data: {
+  id: number | undefined;
+  token: string | undefined;
+}) => {
+  try {
+    const response = await GetRequest(
+      `/api/restaurants/user/${data.id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      }
+    );
+    return response.data;
   } catch (error: any) {
     throw new Error(error?.message);
   }

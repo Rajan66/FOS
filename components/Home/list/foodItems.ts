@@ -3,6 +3,9 @@ import momo from "@/public/assets/momo.png";
 import pizza from "@/public/assets/pizza.png";
 import biryani from "@/public/assets/biryani.png";
 import pasta from "@/public/assets/pasta.png";
+import chicken from "@/public/assets/chicken.jpg";
+import gimbap from "@/public/assets/gimbap.jpg";
+import mac from "@/public/assets/mac.jpg";
 
 export const foodItems = [
   {
@@ -26,18 +29,18 @@ export const foodItems = [
     image: biryani,
   },
   {
-    name: "Pasta",
-    href: "/food/pasta",
-    image: pasta,
+    name: "Chicken",
+    href: "/food/chicken",
+    image: chicken,
   },
   {
-    name: "Pasta",
-    href: "/food/pasta",
-    image: pasta,
+    name: "Gimbap",
+    href: "/food/gimbap",
+    image: gimbap,
   },
   {
-    name: "Pasta",
-    href: "/food/pasta",
-    image: pasta,
+    name: "Mac & Cheese",
+    href: "/food/mac",
+    image: mac,
   }
 ];

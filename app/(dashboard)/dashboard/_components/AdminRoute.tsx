@@ -22,7 +22,7 @@ const AdminRoute = ({ children }: any) => {
         return <span className='text-blue-400'><Loading /></span>;
     }
     if (!session || session.user.role !== 'ADMIN') {
-        return null;
+        return null; 
     }
 
     return <>{children}</>;

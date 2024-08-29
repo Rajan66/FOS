@@ -7,8 +7,7 @@ export const FoodSchema = z.object({
     .min(1, { message: "Food Name is required" }),
   category: z
     .string({ required_error: "Food Category is required" })
-    .min(1, { message: "Food Category is required" })
-    .email(),
+    .min(1, { message: "Food Category is required" }),
   price: z
     .string({ required_error: "Food Price is required" })
     .min(1, { message: "Food Price is required" }),
