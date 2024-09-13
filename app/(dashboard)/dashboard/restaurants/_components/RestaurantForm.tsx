@@ -20,7 +20,6 @@ const RestaurantForm = () => {
     const queryClient = useQueryClient();
     const session = useSession();
 
-
     const {
         register,
         handleSubmit,
@@ -80,8 +79,6 @@ const RestaurantForm = () => {
                 desc="enter the restaurant's name"
                 label="Restaurant's Name *"
             />
-
-
 
             <InputBox<TRestaurant>
                 name="cuisine"

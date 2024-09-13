@@ -35,24 +35,31 @@ type Food = {
 
 type Order = {
   id: number;
-  userId: number;
   restaurantId: number;
+  userId: number;
   transactionId: number;
   partnerId: number;
-  orderItems: [OrderItem];
+  orderDetails: [OrderDetails];
+  orderDate: Date;
+  deliveryAddress: string;
   totalPrice: number;
-  notes: string;
+  paymentStatus: string;
+  orderStatus: string;
+  specialInstructions: string;
   cancellationReason: string;
+  deliveryDate: string;
+  notes: string;
 };
 
-type OrderItem = {
+type OrderDetails = {
   id: number;
+  foodId: string;
   orderId: number;
-  food: Food;
   quantity: number;
   price: number;
   totalPrice: number;
   notes: string;
+  status: string;
 };
 
 type UserDetails = {
