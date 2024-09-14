@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const RestaurantCards = ({ searchTerm }: any) => {
-    const [page, setPage] = useState<number>(1);
+    const [page, setPage] = useState<number>(2);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [restaurantList, setRestaurantList] = useState<any[]>([]);
     const { data: restaurants, isPending } = useGetAllRestaurants(page);
