@@ -31,6 +31,7 @@ type Food = {
   name: string;
   category: string;
   price: string;
+  quantity: number;
 };
 
 type Order = {
