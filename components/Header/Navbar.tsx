@@ -21,7 +21,6 @@ import Cart from './Cart'
 
 const Navbar = () => {
   const { data: session } = useSession();
-  const itemCount = 10;
   const userRole = session?.user?.role;
   return (
     <header className="flex gap-5 justify-between bg-white mx-[20px] md:mx-[40px] 2xl:mx-[80px] my-2 max-md:flex-wrap">
@@ -74,7 +73,7 @@ const Navbar = () => {
               </Link>
             ) : (
               <div className="hidden mmd:flex justify-center items-center gap-x-8">
-                <Cart itemCount={itemCount} />
+                <Cart />
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <div className="flex items-center gap-x-5">
