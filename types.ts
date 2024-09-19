@@ -38,6 +38,8 @@ type Food = {
 type Order = {
   id: number;
   restaurantId: number;
+  restaurant: Restaurant;
+  user: User;
   userId: number;
   transactionId: number;
   partnerId: number;
@@ -56,6 +58,7 @@ type Order = {
 type OrderDetails = {
   id: number;
   foodId: string;
+  foodName: string;
   orderId: number;
   quantity: number;
   price: number;

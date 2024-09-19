@@ -14,7 +14,10 @@ export const useGetAllOrders = (
   return { data, isPending, refetch };
 };
 
-export const useGetOrderDetails = (id: number, token: string | undefined) => {
+export const useGetOrderDetails = (
+  id: number | undefined,
+  token: string | undefined
+) => {
   const { data, isPending } = useQuery<Order>({
     queryKey: ["order", id],
     queryFn: () => getOrderDetails({ id, token }),

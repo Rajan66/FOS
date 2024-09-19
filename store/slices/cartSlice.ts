@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type Food = {
   foodId: number;
   menuId: number;
-  name: string;
+  foodName: string;
   category: string;
   price: string;
   quantity: number;
@@ -28,6 +28,9 @@ const cartSlice = createSlice({
       );
 
       if (itemExists) {
+        itemExists.foodName = action.payload.name;
+        console.log(itemExists.foodName);
+        console.log(action.payload.name);
         itemExists.quantity += 1;
       } else {
         state.items.push({ ...action.payload, quantity: 1 });
