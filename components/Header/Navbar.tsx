@@ -8,7 +8,7 @@ import NavItem from "./NavItem";
 import { Button } from "@/components/ui/button";
 import MblNavbar from "./MblNavbar";
 import { useSession } from "next-auth/react";
-import { CircleUser } from "lucide-react";
+import { CircleUser, Truck } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -84,10 +84,18 @@ const Navbar = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-20">
                     <DropdownMenuGroup>
-                      <DropdownMenuItem className="justify-center">
-                        <CircleUser className="mr-2 size-4" />
-                        <span className="font-semibold text-black text-sm">Profile</span>
-                      </DropdownMenuItem>
+                      <Link href={'/profile'}>
+                        <DropdownMenuItem className="justify-center">
+                          <CircleUser className="mr-2 size-4" />
+                          <span className="font-semibold text-black text-sm">Profile</span>
+                        </DropdownMenuItem>
+                      </Link>
+                      <Link href={'/profile/orders'}>
+                        <DropdownMenuItem className="justify-center">
+                          <Truck className="mr-2 size-4" />
+                          <span className="font-semibold text-black text-sm">Orders</span>
+                        </DropdownMenuItem>
+                      </Link>
                       <DropdownMenuItem>
                         <LogoutBtnNav />
                       </DropdownMenuItem>

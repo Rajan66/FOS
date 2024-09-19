@@ -96,13 +96,13 @@ const Cart = () => {
                                         <p>Delivery Charge: </p>
                                         <p className="opacity-70">Rs. 120</p>
                                     </div>
-                                    <div className="border border-yellow-300"></div>
+                                    <div className="border border-red-400"></div>
                                     <div className="flex justify-between">
                                         <p>Total: </p>
                                         <p className="opacity-70">Rs. {total.toFixed(2)}</p>
                                     </div>
                                     <Link href="/checkout">
-                                        <Button className="w-full mt-10">Proceed to Checkout</Button>
+                                        <Button className="w-full mt-10 bg-primary hover:bg-primary/80 text-white">Proceed to Checkout</Button>
                                     </Link>
                                 </div>
 
