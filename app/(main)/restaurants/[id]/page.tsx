@@ -64,7 +64,7 @@ const Page = () => {
                 selectedCategory={selectedCategory}
                 onSelectCategory={setSelectedCategory}
             />
-
+``
             {/* Menu Section */}
             {selectedCategory && (
                 <MenuSection

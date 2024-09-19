@@ -21,7 +21,8 @@ type Restaurant = {
 
 type Menu = {
   menuId: number;
-  restaurantId: number;
+  foods: [Food];
+  restaurant: Restaurant;
   name: string;
 };
 
@@ -29,13 +30,17 @@ type Food = {
   foodId: number;
   menuId: number;
   name: string;
+  foodName: string;
   category: string;
   price: string;
+  quantity: number;
 };
 
 type Order = {
   id: number;
   restaurantId: number;
+  restaurant: Restaurant;
+  user: User;
   userId: number;
   transactionId: number;
   partnerId: number;
@@ -54,6 +59,7 @@ type Order = {
 type OrderDetails = {
   id: number;
   foodId: string;
+  foodName: string;
   orderId: number;
   quantity: number;
   price: number;

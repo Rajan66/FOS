@@ -14,19 +14,39 @@ import { TOrder, OrderSchema } from "@/schemas/orderSchema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Banknote } from "lucide-react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { useGetMenuDetail } from "@/hooks/menusQueries";
+import { clearCart } from "@/store/slices/cartSlice";
 
 const OrderForm = () => {
     const router = useRouter();
     const queryClient = useQueryClient();
     const session = useSession();
     const user = session.data?.user;
+    const dispatch = useDispatch();
+
 
     const [selectedPayment, setSelectedPayment] = useState(null);
+
+    const cart = useSelector((state: RootState) => state.cart.items);
+    const menuId = cart.length > 0 ? cart[0].menuId : -1;
+    const menu = useGetMenuDetail(menuId, session?.data?.user?.access_token);
+
+    const subtotal = cart.reduce(
+        (total, food) => total + parseFloat(food.price) * food.quantity,
+        0
+    );
+
+    const total = subtotal + 120;
 
     const handleSelect = (paymentType: any) => {
         setSelectedPayment(paymentType);
     };
 
+    const handleClearCart = () => {
+        dispatch(clearCart());
+    };
     const {
         register,
         handleSubmit,
@@ -63,17 +83,11 @@ const OrderForm = () => {
         }
 
         const additionalFields = {
-            restaurantId: 1,
+            restaurantId: menu.data?.restaurant.restaurantId,
             paymentStatus: 'pending',
             orderStatus: 'unfulfilled',
-            orderDetails: [{
-                foodId: 254,
-                quantity: 1,
-                price: 1050,
-                totalPrice: 1050
-            }],
-            totalPrice: 1050,
-            specialInstructions: 'No onions, please.'
+            orderDetails: [...cart],
+            totalPrice: total,
         };
 
         const orderData = {
@@ -84,8 +98,9 @@ const OrderForm = () => {
             },
             token: session?.data?.user?.access_token
         };
-
+        console.log(orderData)
         mutate(orderData);
+        handleClearCart();
     };
 
     return (

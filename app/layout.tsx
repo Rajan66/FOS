@@ -1,9 +1,11 @@
+
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import NextAuthSessionProvider from "@/components/SessionProvider";
 import QueryProvider from "@/components/QueryProvider";
+import ReduxProvider from "@/components/ReduxProvider";
 
 
 const rubik = Rubik({
@@ -26,11 +28,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={rubik.className}>
         <Toaster position="top-center" reverseOrder={true} />
-        <NextAuthSessionProvider>
-          <QueryProvider>
-            {children}
-          </QueryProvider>
-        </NextAuthSessionProvider>
+        <ReduxProvider>
+          <NextAuthSessionProvider>
+            <QueryProvider>
+              {children}
+            </QueryProvider>
+          </NextAuthSessionProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
