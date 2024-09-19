@@ -30,6 +30,7 @@ type Food = {
   foodId: number;
   menuId: number;
   name: string;
+  foodName: string;
   category: string;
   price: string;
   quantity: number;
