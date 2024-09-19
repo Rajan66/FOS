@@ -21,7 +21,8 @@ type Restaurant = {
 
 type Menu = {
   menuId: number;
-  restaurantId: number;
+  foods: [Food];
+  restaurant: Restaurant;
   name: string;
 };
 

@@ -11,13 +11,19 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { addItem, clearCart, removeItem } from '@/store/slices/cartSlice';
+import { useGetMenuDetail } from '@/hooks/menusQueries';
+import { useSession } from 'next-auth/react';
 
 const Cart = () => {
+    const session = useSession()
     const cart = useSelector((state: RootState) => state.cart.items);
     const dispatch = useDispatch();
 
+    const menuId = cart.length > 0 ? cart[0].menuId : -1;
+    const menu = useGetMenuDetail(menuId, session?.data?.user?.access_token);
+    const restaurantName = menu?.data?.restaurant?.name;
+
     const handleAddItem = (item: Food) => {
-        console.log(item);
         dispatch(addItem(item));
     };
 
@@ -28,6 +34,13 @@ const Cart = () => {
     const handleClearCart = () => {
         dispatch(clearCart());
     };
+
+    const subtotal = cart.reduce(
+        (total, food) => total + parseFloat(food.price) * food.quantity,
+        0
+    );
+
+    const total = subtotal + 120;
 
     return (
         <Sheet>
@@ -45,7 +58,9 @@ const Cart = () => {
                 <div className="p-1 py-2 bg-white rounded-lg h-full flex flex-col justify-between">
                     <div>
                         <h2 className="text-xl font-bold text-center mb-4">Your Shopping Cart</h2>
-                        <h2 className="text-lg font-semibold text-center mb-8">Alchemy Pizzeria</h2>
+                        <div className='flex justify-center '>
+                            <h2 className="text-lg font-semibold text-center mb-8">{restaurantName}</h2>
+                        </div>
                     </div>
 
                     {cart.length > 0 ? (
@@ -67,7 +82,7 @@ const Cart = () => {
                                         </div>
                                     </div>
                                     <div className="flex flex-col justify-center items-center">
-                                        <p>Rs. {food?.price * (food?.quantity || 1)}</p>
+                                        <p>Rs. {parseFloat(food.price) * (food?.quantity || 1)}</p>
                                     </div>
                                 </div>
                             ))}
@@ -75,23 +90,22 @@ const Cart = () => {
                                 <div className="flex flex-col gap-y-4">
                                     <div className="flex justify-between">
                                         <p>Subtotal: </p>
-                                        <p className='opacity-70'>Rs. {cart.reduce(({ total, item }: any) => total + (parseFloat(item?.price) * item?.quantity), 0)}</p>
+                                        <p className="opacity-70">Rs. {subtotal.toFixed(2)}</p>
                                     </div>
                                     <div className="flex justify-between">
                                         <p>Delivery Charge: </p>
-                                        <p className='opacity-70'>Rs. 123</p>
+                                        <p className="opacity-70">Rs. 120</p>
                                     </div>
                                     <div className="border border-yellow-300"></div>
                                     <div className="flex justify-between">
                                         <p>Total: </p>
-                                        <p className='opacity-70'>Rs. {cart.reduce(({ total, item }: any) => total + (parseFloat(item?.price) * item?.quantity), 0) + 123}</p>
+                                        <p className="opacity-70">Rs. {total.toFixed(2)}</p>
                                     </div>
+                                    <Link href="/checkout">
+                                        <Button className="w-full mt-10">Proceed to Checkout</Button>
+                                    </Link>
                                 </div>
-                                <Link href="/checkout">
-                                    <Button className='w-full mt-10'>
-                                        Proceed to Checkout
-                                    </Button>
-                                </Link>
+
                             </div>
                         </div>
                     ) : (
