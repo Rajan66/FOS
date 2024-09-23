@@ -8,66 +8,36 @@ import { ChefHat, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+
 const RestaurantCards = ({ searchTerm }: any) => {
-    const [page, setPage] = useState<number>(2);
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
-    const [restaurantList, setRestaurantList] = useState<any[]>([]);
-    const { data: restaurants, isPending } = useGetAllRestaurants(page);
-    const loaderRef = useRef<HTMLDivElement | null>(null);
+    const [page, setPage] = useState<number>(1);
+    const [restaurants, setRestaurants] = useState<Restaurant[]>([]); // Hold all restaurants
+    const { data, isPending } = useGetAllRestaurants(page);
 
-    // const restaurantsPerPage = 6;
-    // console.log(searchTerm)
-    // useEffect(() => {
-    //     if (restaurants?.content) {
-    //         setRestaurantList((prevList) => [...prevList, ...restaurants.content]);
-    //         window.scrollTo(0, 0);
-    //     }
-    // }, [restaurants]);
+    useEffect(() => {
+        if (data) {
+            setRestaurants((prevRestaurants) => [
+                ...prevRestaurants,
+                ...data.content, // Append new restaurants
+            ]);
+        }
+    }, [data]);
 
-    // useEffect(() => {
-    //     const observer = new IntersectionObserver(
-    //         (entries) => {
-    //             if (entries[0].isIntersecting && page === 1) {
-    //                 loadMoreRestaurants();
-    //             }
-    //         },
-    //         { threshold: 1 }
-    //     );
+    const handleViewMore = () => {
+        setPage((prevPage) => prevPage + 1); // Increment the page state
+    };
 
-    //     if (loaderRef.current) {
-    //         observer.observe(loaderRef.current);
-    //     }
+    const isLastPage = data?.totalPages && page >= data.totalPages;
 
-    //     return () => {
-    //         if (loaderRef.current) {
-    //             observer.unobserve(loaderRef.current);
-    //         }
-    //     };
-    // }, [restaurantList, page]);
 
-    // useEffect(() => {
-    //     setCurrentIndex(0);
-    // }, [searchTerm]);
-
-    // const loadMoreRestaurants = () => {
-    //     if (currentIndex + restaurantsPerPage >= restaurantList.length) {
-    //         setPage((prevPage) => prevPage + 1);
-    //     } else {
-    //         setCurrentIndex((prevIndex) => prevIndex + restaurantsPerPage);
-    //     }
-    // };
-
-    // const displayedRestaurants = restaurantList
-    //     .filter(restaurant =>
-    //         restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    //         restaurant.cuisine.toLowerCase().includes(searchTerm.toLowerCase())
-    //     )
-    //     .slice(0, currentIndex + restaurantsPerPage);
+    if (isPending) {
+        return <Loading />;
+    }
 
     return (
         <section className="mt-10 mx-[20px] md:mx-[40px] 2xl:mx-[80px] max-md:flex-wrap">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mt-14">
-                {restaurants?.content.map((restaurant) => (
+                {restaurants.map((restaurant) => (
                     <Card key={restaurant.restaurantId} className="hover:shadow-lg transition-shadow">
                         <CardHeader className="p-4">
                             <Image
@@ -103,15 +73,14 @@ const RestaurantCards = ({ searchTerm }: any) => {
                 ))}
             </div>
 
-            {isPending && (
-                <div className="flex justify-center mt-6">
-                    <Loading />
+            {!isLastPage && (
+                <div className="justify-center items-center flex mt-10">
+                    <Button className="text-white" onClick={handleViewMore}>View More</Button>
                 </div>
             )}
-
-            <div ref={loaderRef} className="h-10"></div>
         </section>
     );
 };
 
 export default RestaurantCards;
+
