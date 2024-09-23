@@ -113,3 +113,28 @@ export const getRestUser = async (data: {
     throw new Error(error?.message);
   }
 };
+
+export const getRestaurantRecommendation = async (data: {
+  // id: number | undefined;
+  userOrders: Order[] | undefined;
+  token: string | undefined;
+}) => {
+  try {
+    const userOrdersArray = data.userOrders
+      ? Object.values(data.userOrders)
+      : [];
+    console.log(userOrdersArray);
+    const response = await PostRequest(
+      `/api/recommendations/restaurant`,
+      userOrdersArray,
+      {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error?.message);
+  }
+};

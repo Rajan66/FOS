@@ -2,8 +2,10 @@ import {
   getAllRestaurants,
   getRestUser,
   getRestaurantDetail,
+  getRestaurantRecommendation,
 } from "@/apicalls/restaurant";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { get } from "http";
 
 export const useGetAllRestaurants = (page: number | 1) => {
   const { data, isPending } = useQuery<PaginatedRestaurantsData>({
@@ -30,6 +32,19 @@ export const useGetRestaurantUser = (
   const { data, isPending } = useQuery<Restaurant>({
     queryKey: ["restUser", id],
     queryFn: () => getRestUser({ id, token }),
+  });
+
+  return { data, isPending };
+};
+
+export const useGetRestaurantRecommendation = (
+  // id: number | undefined,
+  userOrders: Order[] | undefined,
+  token: string | undefined
+) => {
+  const { data, isPending } = useQuery<Restaurant>({
+    queryKey: ["recommendations"],
+    queryFn: () => getRestaurantRecommendation({ userOrders, token }),
   });
 
   return { data, isPending };

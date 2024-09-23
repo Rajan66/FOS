@@ -50,6 +50,7 @@ const EditFoodForm = ({ id, foodId }: EditFoodFormProps) => {
             setValue("name", foodData?.name || "");
             setValue("category", foodData?.category || "");
             setValue("price", foodData?.price || '');
+            setValue("spiceLevel", foodData?.spiceLevel || '');
         }
     }, [foodData, setValue]);
 
@@ -76,7 +77,8 @@ const EditFoodForm = ({ id, foodId }: EditFoodFormProps) => {
             data: {
                 ...data,
                 menuId: Number(id),
-                price: Number(data.price)
+                price: Number(data.price),
+                spiceLevel: Number(data.spiceLevel),
             },
             token: session?.data?.user?.access_token,
         };
@@ -112,6 +114,17 @@ const EditFoodForm = ({ id, foodId }: EditFoodFormProps) => {
                 desc="enter the category of food"
                 label="Food's Category *"
             />
+
+            <InputBox<TFood>
+                name="spiceLevel"
+                id="spiceLevel"
+                placeholder="Enter Food's Spice Level (1-5)..."
+                register={register}
+                error={(errors && errors?.spiceLevel?.message?.toString()) || ""}
+                desc="enter the spice level of food"
+                label="Food's Spiciness *"
+            />
+
             <InputBox<TFood>
                 name="price"
                 id="price"

@@ -56,7 +56,8 @@ const EditFoodForm = () => {
             restaurantId: restaurantData?.restaurantId,
             body: {
                 ...data,
-                price: Number(data.price)
+                price: Number(data.price),
+                spiceLevel: Number(data.spiceLevel),
             },
             token: session?.data?.user?.access_token,
         };
@@ -93,6 +94,17 @@ const EditFoodForm = () => {
                 desc="enter the category of food"
                 label="Food's Category *"
             />
+
+            <InputBox<TFood>
+                name="spiceLevel"
+                id="spiceLevel"
+                placeholder="Enter Food's Spice Level (1-5)..."
+                register={register}
+                error={(errors && errors?.spiceLevel?.message?.toString()) || ""}
+                desc="enter the spice level of food"
+                label="Food's Spiciness *"
+            />
+
             <InputBox<TFood>
                 name="price"
                 id="price"

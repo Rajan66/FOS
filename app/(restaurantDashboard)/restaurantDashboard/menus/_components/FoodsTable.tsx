@@ -78,6 +78,9 @@ const FoodsTable = () => {
                             <th scope="col" className="px-6 py-3">
                                 Price
                             </th>
+                            <th scope="col" className="px-6 py-3">
+                                Spice Level
+                            </th>
                             <th scope="col" className="pl-6 py-3 pr-14 text-end">
                                 Actions
                             </th>
@@ -86,7 +89,7 @@ const FoodsTable = () => {
 
                     <tbody className="w-full opacity-80">
                         {foodData?.content?.map(
-                            ({ foodId, name, category, price }: any) => (
+                            ({ foodId, name, category, price,spiceLevel }: any) => (
                                 <tr
                                     key={foodId}
                                     className={cn(
@@ -116,6 +119,12 @@ const FoodsTable = () => {
                                         className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                                     >
                                         {price}
+                                    </td>
+                                    <td
+                                        scope="row"
+                                        className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
+                                    >
+                                        {spiceLevel}
                                     </td>
                                     <td
                                         scope="row"

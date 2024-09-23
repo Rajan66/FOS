@@ -27,13 +27,14 @@ type Menu = {
 };
 
 type Food = {
+  name: string;
   foodId: number;
   menuId: number;
-  name: string;
   foodName: string;
   category: string;
   price: string;
   quantity: number;
+  spiceLevel: string;
 };
 
 type Order = {
@@ -48,6 +49,7 @@ type Order = {
   orderDate: Date;
   deliveryAddress: string;
   totalPrice: number;
+  averagePrice: number;
   paymentStatus: string;
   orderStatus: string;
   specialInstructions: string;

@@ -1,16 +1,6 @@
 // store/slices/cartSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type Food = {
-  foodId: number;
-  menuId: number;
-  foodName: string;
-  name: string;
-  category: string;
-  price: string;
-  quantity: number;
-};
-
 interface CartState {
   items: Food[];
 }
@@ -29,10 +19,13 @@ const cartSlice = createSlice({
       );
 
       if (itemExists) {
-        itemExists.foodName = action.payload.name;
         itemExists.quantity += 1;
       } else {
-        state.items.push({ ...action.payload, quantity: 1 });
+        state.items.push({
+          ...action.payload,
+          foodName: action.payload.name,
+          quantity: 1,
+        });
       }
     },
     removeItem: (state, action: PayloadAction<number>) => {
