@@ -126,7 +126,7 @@ const LoginForm = () => {
           aria-live="polite"
           aria-atomic="true"
         >
-          <p>Don't have an account?</p>
+          <p>{`Don't have an account?`}</p>
           <Link
             href={"/signup"}
             className="text-red-500 hover:underline transition"
