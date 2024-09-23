@@ -38,7 +38,13 @@ const OrderForm = () => {
         0
     );
 
+    const totalQuantity = cart.reduce(
+        (quantity, food) => quantity + food.quantity,
+        0
+    );
+
     const total = subtotal + 120;
+    const averagePrice = subtotal / totalQuantity;
 
     const handleSelect = (paymentType: any) => {
         setSelectedPayment(paymentType);
@@ -88,6 +94,7 @@ const OrderForm = () => {
             orderStatus: 'unfulfilled',
             orderDetails: [...cart],
             totalPrice: total,
+            averagePrice: averagePrice,
         };
 
         const orderData = {
