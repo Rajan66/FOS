@@ -15,10 +15,20 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import { ChevronRight } from 'lucide-react'
-import { useGetAllRestaurants } from '@/hooks/restaurantsQueries'
+import { useGetAllRestaurants, useGetRestaurantRecommendation } from '@/hooks/restaurantsQueries'
+import { useSession } from 'next-auth/react'
+import { useGetAllOrders } from '@/hooks/orderQueries'
 
 const Recommendations = () => {
+    const session = useSession();
+
+    const userId = session.data?.user?.id;
+    const orders = useGetAllOrders(userId, 1);
+
     const { data: restaurantData, isPending } = useGetAllRestaurants(2);
+    const { data: data, isPending: isLoading } = useGetRestaurantRecommendation(orders.data?.content, session?.data?.user?.access_token);
+
+    console.log(data)
 
     return (
         <section className="mt-10 md:mt-20 mx-[20px] md:mx-[40px] 2xl:mx-[80px] max-md:flex-wrap">
