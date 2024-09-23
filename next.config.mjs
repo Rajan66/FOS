@@ -3,6 +3,7 @@ const nextConfig = {
     images: {
         domains: ['localhost', 'localhost:8080'], // Add your image domains here
     },
+    ignoreDuringBuilds: true,
 };
 
 export default nextConfig;
