@@ -9,7 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { changePassword } from "@/apicalls/users";
 import toast from "react-hot-toast";
 
-const page = (token: string | undefined) => {
+const page = (token: string) => {
     const {
         register,
         handleSubmit,
