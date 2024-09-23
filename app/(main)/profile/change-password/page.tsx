@@ -9,11 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { changePassword } from "@/apicalls/users";
 import toast from "react-hot-toast";
 
-type Props = {
-    token: string | undefined;
-};
-
-const page = ({ token }: Props) => {
+const page = (token: string | undefined) => {
     const {
         register,
         handleSubmit,
@@ -54,44 +50,44 @@ const page = ({ token }: Props) => {
     return (
         <section className="mt-20 mx-[20px] md:mx-[40px] 2xl:mx-[80px] max-md:flex-wrap flex flex-col gap-y-10 justify-start mb-20">
 
-        <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-y-8 py-10 px-5 vsm:px-14 rounded-lg border border-input shadow"
-        >
-            <InputBox<TChangePass>
-                name="current_password"
-                id="current_password"
-                placeholder="Enter Current Password..."
-                type="password"
-                register={register}
-                error={(errors && errors?.current_password?.message?.toString()) || ""}
-                desc="enter the current password."
-                label="Current Password"
-            />
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col gap-y-8 py-10 px-5 vsm:px-14 rounded-lg border border-input shadow"
+            >
+                <InputBox<TChangePass>
+                    name="current_password"
+                    id="current_password"
+                    placeholder="Enter Current Password..."
+                    type="password"
+                    register={register}
+                    error={(errors && errors?.current_password?.message?.toString()) || ""}
+                    desc="enter the current password."
+                    label="Current Password"
+                />
 
-            <InputBox<TChangePass>
-                name="password"
-                id="password"
-                placeholder="Enter New Password..."
-                type="password"
-                register={register}
-                error={(errors && errors?.password?.message?.toString()) || ""}
-                desc="enter the new password."
-                label="New Password"
-            />
+                <InputBox<TChangePass>
+                    name="password"
+                    id="password"
+                    placeholder="Enter New Password..."
+                    type="password"
+                    register={register}
+                    error={(errors && errors?.password?.message?.toString()) || ""}
+                    desc="enter the new password."
+                    label="New Password"
+                />
 
-            {/* Form Submission */}
-            <Button type="submit" className="px-5 py-2.5 my-auto text-[16px] w-[200px] h-[40px] font-medium rounded-md border-r-0 ">
-                {Updating ? (
-                    <div className="flex items-center gap-2">
-                        <Loader2 className="size-5 animate-spin" />
-                        <p>Changing Password..</p>
-                    </div>
-                ) : (
-                    "Change Password"
-                )}
-            </Button>
-        </form>
+                {/* Form Submission */}
+                <Button type="submit" className="px-5 py-2.5 my-auto text-[16px] w-[200px] h-[40px] font-medium rounded-md border-r-0 ">
+                    {Updating ? (
+                        <div className="flex items-center gap-2">
+                            <Loader2 className="size-5 animate-spin" />
+                            <p>Changing Password..</p>
+                        </div>
+                    ) : (
+                        "Change Password"
+                    )}
+                </Button>
+            </form>
         </section>
     );
 };
