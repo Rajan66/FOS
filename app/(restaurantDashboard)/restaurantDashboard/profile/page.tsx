@@ -70,7 +70,7 @@ const page = () => {
                 queryClient.invalidateQueries({ queryKey: ["restaurants"] });
                 toast.success("Restaurant Updated Successfully");
                 reset();
-                router.push("/dashboard/restaurants");
+                // router.push("/restaurantDashboard/profile");
             }
 
             if (data.response.status === 422) {

@@ -42,6 +42,7 @@ const EditFoodForm = ({ id, foodId }: EditFoodFormProps) => {
             name: foodData?.name,
             category: foodData?.category,
             price: foodData?.price,
+            spiceLevel: foodData?.spiceLevel,
         },
     });
 

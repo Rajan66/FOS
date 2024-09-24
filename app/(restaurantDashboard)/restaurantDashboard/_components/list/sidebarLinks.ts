@@ -1,8 +1,5 @@
 export const sidebarLinks = [
-  {
-    name: "Overview",
-    link: "/restaurantDashboard",
-  },
+
   {
     name: "Menus",
     link: "/restaurantDashboard/menus",

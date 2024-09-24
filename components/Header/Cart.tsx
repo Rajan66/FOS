@@ -109,7 +109,7 @@ const Cart = () => {
                             </div>
                         </div>
                     ) : (
-                        <p className="text-center text-gray-600">Your cart is empty</p>
+                        <p className="text-center text-gray-600 justify-center items-center flex h-screen">Oops... your cart is empty 🛒</p>
                     )}
                 </div>
             </SheetContent>

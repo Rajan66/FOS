@@ -11,24 +11,28 @@ import Link from "next/link";
 
 const RestaurantCards = ({ searchTerm }: any) => {
     const [page, setPage] = useState<number>(1);
-    const [restaurants, setRestaurants] = useState<Restaurant[]>([]); // Hold all restaurants
+    const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
     const { data, isPending } = useGetAllRestaurants(page);
 
     useEffect(() => {
         if (data) {
             setRestaurants((prevRestaurants) => [
                 ...prevRestaurants,
-                ...data.content, // Append new restaurants
+                ...data.content, 
             ]);
         }
     }, [data]);
 
     const handleViewMore = () => {
-        setPage((prevPage) => prevPage + 1); // Increment the page state
+        setPage((prevPage) => prevPage + 1); 
     };
 
     const isLastPage = data?.totalPages && page >= data.totalPages;
 
+    // Filter restaurants based on search term
+    const filteredRestaurants = restaurants.filter((restaurant) =>
+        restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     if (isPending) {
         return <Loading />;
@@ -37,7 +41,7 @@ const RestaurantCards = ({ searchTerm }: any) => {
     return (
         <section className="mt-10 mx-[20px] md:mx-[40px] 2xl:mx-[80px] max-md:flex-wrap">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mt-14">
-                {restaurants.map((restaurant) => (
+                {filteredRestaurants.map((restaurant) => (
                     <Card key={restaurant.restaurantId} className="hover:shadow-lg transition-shadow">
                         <CardHeader className="p-4">
                             <Image
@@ -81,6 +85,7 @@ const RestaurantCards = ({ searchTerm }: any) => {
         </section>
     );
 };
+
 
 export default RestaurantCards;
 

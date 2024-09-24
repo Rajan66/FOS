@@ -42,7 +42,7 @@ export const useGetRestaurantRecommendation = (
   userOrders: Order[] | undefined,
   token: string | undefined
 ) => {
-  const { data, isPending } = useQuery<Restaurant>({
+  const { data, isPending } = useQuery<Restaurant[]>({
     queryKey: ["recommendations"],
     queryFn: () => getRestaurantRecommendation({ userOrders, token }),
   });

@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 import { TRestaurant, RestaurantSchema } from "@/schemas/restaurantSchema";
 import msgIcon from "@/public/assets/msg.png"
 import Image from "next/image";
-import { Textarea } from "@/components/ui/textarea";
 import TextAreaBox from "@/components/TextAreaBox";
 
 const RestaurantForm = () => {
