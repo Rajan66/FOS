@@ -37,15 +37,10 @@ export const useGetRestaurantUser = (
   return { data, isPending };
 };
 
-export const useGetRestaurantRecommendation = (
-  // id: number | undefined,
-  userOrders: Order[] | undefined,
-  token: string | undefined
-) => {
-  const { data, isPending } = useQuery<Restaurant[]>({
-    queryKey: ["recommendations"],
+export const useGetRestaurantRecommendation = ({ userOrders, token }: any) => {
+  return useQuery<Restaurant[]>({
+    queryKey: ["recommendations", userOrders],
     queryFn: () => getRestaurantRecommendation({ userOrders, token }),
+    enabled: !!userOrders && !!token, // only run the query if userOrders and token are available
   });
-
-  return { data, isPending };
 };

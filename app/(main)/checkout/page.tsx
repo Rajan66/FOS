@@ -98,9 +98,6 @@ const page = () => {
                                         <p>Total: </p>
                                         <p className="opacity-70">Rs. {total.toFixed(2)}</p>
                                     </div>
-                                    <Link href="/checkout">
-                                        <Button className="w-full mt-10 bg-primary hover:bg-primary/80 text-white">Proceed to Checkout</Button>
-                                    </Link>
                                 </div>
 
                             </div>
