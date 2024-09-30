@@ -4,10 +4,7 @@ export const sidebarLinks = [
     name: "Menus",
     link: "/restaurantDashboard/menus",
   },
-  {
-    name: "Orders",
-    link: "/restaurantDashboard/orders",
-  },
+
   {
     name: "Account",
     link: "/restaurantDashboard/account",
