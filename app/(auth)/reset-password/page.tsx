@@ -1,17 +1,25 @@
 "use client"
 
+import { resetPassword } from '@/apicalls/users';
 import InputBox from '@/components/InputBox';
 import { Button } from '@/components/ui/button';
 import { TNewPassword, TResetPassword, newPasswordSchema, resetPasswordSchema } from '@/schemas/authSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { Loader2, LockKeyhole } from 'lucide-react';
-import React, { useState } from 'react'
+import { useParams, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 const page = () => {
     const [errorMsg, setErrorMsg] = useState("");
     const [loading, setLoading] = useState(false)
+    const searchParams = useSearchParams()
+
+    const token = searchParams.get('token') ?? "";
+    console.log(token)
     const {
         register,
         handleSubmit,
@@ -22,8 +30,23 @@ const page = () => {
 
 
     const onSubmit = async (data: TNewPassword) => {
-        setLoading(true);
+        try {
+            setLoading(true);
+            await resetPassword({
+                token: token,
+                newPassword: data.password,
+            });
+            console.log(data);
+            toast.success("Your password has been changed!");
 
+            setTimeout(() => {
+                window.location.href = '/login';
+            }, 3000);
+        } catch (error: any) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
     };
 
 

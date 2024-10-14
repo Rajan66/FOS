@@ -118,13 +118,13 @@ export const requestResetPassword = async (data: { email: string }) => {
 
 export const resetPassword = async (data: {
   token: string;
-  password: string;
+  newPassword: string;
 }) => {
   try {
     const response = await PostRequest(
-      `/api/password-reset/changePassword?token=${data.token}`,
-      {},
-      { body: data.password }
+      `/api/password-reset/change-password`,
+      { ...data },
+      {}
     );
     return response.data;
   } catch (error: any) {
