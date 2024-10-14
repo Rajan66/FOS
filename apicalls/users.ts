@@ -69,6 +69,20 @@ export const updateUserDetails = async (params: UpdateProps) => {
   }
 };
 
+export const deleteUser = async (data: {
+  id: number;
+  token: string | undefined;
+}) => {
+  try {
+    const response = await DeleteRequest(`/api/users/${data.id}`, {
+      headers: { authorization: `Bearer ${data.token}` },
+    });
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error?.message);
+  }
+};
+
 type ChangePassProps = {
   data: any;
   token: string | undefined;
@@ -89,14 +103,29 @@ export const changePassword = async (params: ChangePassProps) => {
   }
 };
 
-export const deleteUser = async (data: {
-  id: number;
-  token: string | undefined;
+export const requestResetPassword = async (data: { email: string }) => {
+  try {
+    const response = await PostRequest(
+      `/api/password-reset/request?email=${data.email}`,
+      {},
+      {}
+    );
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error?.message);
+  }
+};
+
+export const resetPassword = async (data: {
+  token: string;
+  password: string;
 }) => {
   try {
-    const response = await DeleteRequest(`/api/users/${data.id}`, {
-      headers: { authorization: `Bearer ${data.token}` },
-    });
+    const response = await PostRequest(
+      `/api/password-reset/changePassword?token=${data.token}`,
+      {},
+      { body: data.password }
+    );
     return response.data;
   } catch (error: any) {
     throw new Error(error?.message);

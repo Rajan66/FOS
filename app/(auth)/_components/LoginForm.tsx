@@ -134,6 +134,11 @@ const LoginForm = () => {
             Register Instead
           </Link>
         </div>
+        <div className="flex justify-center text-sm">
+          <Link href={'/forgot-password'}>
+            <p className="text-red-500 hover:underline transition">Forgot Password?</p>
+          </Link>
+        </div>
       </div>
     </form>
   );

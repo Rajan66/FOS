@@ -21,3 +21,4 @@ export const useGetUserDetails = (id: number, token: string | undefined) => {
 
   return { data, isPending };
 };
+
