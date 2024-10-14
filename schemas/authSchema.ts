@@ -65,3 +65,21 @@ export const registerRestaurantSchema = z
   });
 
 export type TRegisterRestaurant = z.infer<typeof registerRestaurantSchema>;
+
+export const resetPasswordSchema = z.object({
+  email: z.string().email().min(1, { message: "Email is required" }),
+});
+
+export type TResetPassword = z.infer<typeof resetPasswordSchema>;
+
+export const newPasswordSchema = z.object({
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(1, { message: "Password is required" })
+    .min(8, { message: "Passwod of 8 characters required" }),
+  confirm_password: z
+    .string({ required_error: "Confirm Password is required" })
+    .min(1, { message: "Confirm Password is required" }),
+});
+
+export type TNewPassword = z.infer<typeof newPasswordSchema>;

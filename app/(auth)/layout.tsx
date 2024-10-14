@@ -7,7 +7,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section>
+    <section className="text-b">
       <Navbar />
       {children}
     </section>

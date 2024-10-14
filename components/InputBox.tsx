@@ -7,7 +7,7 @@ interface InputBoxProps<T> {
   name: keyof T;
   placeholder: string;
   id: string;
-  register: (name: keyof T, options?: RegisterOptions| any) => UseFormRegisterReturn;
+  register: (name: keyof T, options?: RegisterOptions | any) => UseFormRegisterReturn;
   desc?: string;
   error?: string;
   label?: string;
@@ -16,12 +16,14 @@ interface InputBoxProps<T> {
   value?: any;
   disabled?: boolean;
   maxLength?: number;
+  className?: string;
 }
 
 function InputBox<T>({
   name,
   placeholder,
   id,
+  className,
   register,
   desc,
   error,
@@ -54,7 +56,7 @@ function InputBox<T>({
         className={clsx("border-content py-6", {
           "border-[2px] border-destructive placeholder:text-destructive":
             error !== "",
-        })}
+        },className)}
         disabled={disabled}
       />
       {/* {label && (
