@@ -17,6 +17,9 @@ interface InputBoxProps<T> {
   disabled?: boolean;
   maxLength?: number;
   className?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  min?: string;
+  max?: string;
 }
 
 function InputBox<T>({
@@ -33,6 +36,9 @@ function InputBox<T>({
   value,
   disabled,
   maxLength,
+  onChange,
+  min,
+  max,
 }: InputBoxProps<T>) {
   return (
     <div className="flex flex-col gap-1">
@@ -56,8 +62,11 @@ function InputBox<T>({
         className={clsx("border-content py-6", {
           "border-[2px] border-destructive placeholder:text-destructive":
             error !== "",
-        },className)}
+        }, className)}
         disabled={disabled}
+        onChange={onChange}
+        min={min}
+        max={max}
       />
       {/* {label && (
         <span
