@@ -10,6 +10,16 @@ const OrdersPage = () => {
   const { data: orders, isPending: isLoading } = useGetAllOrders(session?.user?.id, 1);
   console.log(orders)
 
+  // const formatOrderDate = (dateString: string) => {
+  //   const options = { weekday: 'long', year: 'numeric', month: 'short', day: '2-digit' };
+  //   const date = new Date(dateString);
+
+  //   // Format the date to "Friday, Oct 18, 07:59 AM"
+  //   const formattedDate = `${date.toLocaleDateString('en-US', options)}, ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+
+  //   return formattedDate;
+  // }
+
   if (isLoading) {
     return <Loading />;
   }
@@ -22,6 +32,19 @@ const OrdersPage = () => {
             <div>
               <li key={order.id} className="my-6">
                 <h3>Order ID: {order.id}</h3>
+                <h3>
+                  Order Date: {order?.orderDate &&
+                    new Date(order.orderDate).toLocaleString("en-US", {
+                      weekday: "long", // "Friday"
+                      year: "numeric",  // "2024"
+                      month: "short",   // "Oct"
+                      day: "2-digit",   // "18"
+                      hour: "2-digit",  // "07"
+                      minute: "2-digit",// "59"
+                      hour12: true      // "AM/PM"
+                    })
+                  }
+                </h3>
                 <p>Restaurant: {order.restaurant?.name}</p>
                 <p>Total Price: Rs. {order.totalPrice}</p>
                 <p>Status: {order.orderStatus}</p>

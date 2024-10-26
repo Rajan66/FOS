@@ -18,6 +18,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { useGetMenuDetail } from "@/hooks/menusQueries";
 import { clearCart } from "@/store/slices/cartSlice";
+import { Label } from "@radix-ui/react-dropdown-menu";
+import SelectBox from "@/components/SelectBox";
 
 const OrderForm = () => {
     const router = useRouter();
@@ -26,7 +28,7 @@ const OrderForm = () => {
     const user = session.data?.user;
     const dispatch = useDispatch();
 
-
+    const [isScheduleDelivery, setIsScheduleDelivery] = useState(false);
     const [selectedPayment, setSelectedPayment] = useState(null);
 
     const cart = useSelector((state: RootState) => state.cart.items);
@@ -45,6 +47,47 @@ const OrderForm = () => {
 
     const total = subtotal + 120;
     const averagePrice = subtotal / totalQuantity;
+
+    const getDateOptions = () => {
+        const today = new Date();
+        const dateOptions = [];
+
+        for (let i = 0; i <= 4; i++) {
+            const currentDate = new Date(today);
+            currentDate.setDate(today.getDate() + i);
+            const formattedDate = currentDate.toISOString().split("T")[0];
+            dateOptions.push({
+                label: currentDate.toDateString(),
+                value: formattedDate,
+            });
+        }
+
+        return dateOptions;
+    };
+
+
+    const getTimeOptions = () => {
+        const timeOptions = [];
+        const startTime = 8;
+        const endTime = 20;
+
+        for (let hour = startTime; hour < endTime; hour++) {
+            const time1 = `${hour.toString().padStart(2, '0')}:00`;
+            const time1Label = `${hour.toString().padStart(2, '0')}:00-${hour.toString().padStart(2, '0')}:30`;
+
+            const time2 = `${hour.toString().padStart(2, '0')}:30`;
+            const time2Label = `${hour.toString().padStart(2, '0')}:30-${(hour + 1).toString().padStart(2, '0')}:00`;
+
+            timeOptions.push({ label: time1Label, value: time1 });
+            timeOptions.push({ label: time2Label, value: time2 });
+        }
+
+        return timeOptions;
+    };
+
+    const dateOptions = getDateOptions();
+    const timeOptions = getTimeOptions();
+
 
     const handleSelect = (paymentType: any) => {
         setSelectedPayment(paymentType);
@@ -83,9 +126,20 @@ const OrderForm = () => {
     });
 
     const onSubmit = async (data: TOrder) => {
+        let deliveryDateTime = new Date();
         if (selectedPayment === "esewa") {
             console.log("Esewa Payment");
             router.push('/');
+        }
+
+        if (isScheduleDelivery) {
+            const deliveryDate = data.deliveryDate;
+            const deliveryTime = data.deliveryTime;
+
+            const dateTimeString = `${deliveryDate}T${deliveryTime}`;
+
+            deliveryDateTime = new Date(dateTimeString);
+
         }
 
         const additionalFields = {
@@ -94,13 +148,17 @@ const OrderForm = () => {
             orderStatus: 'unfulfilled',
             orderDetails: [...cart],
             totalPrice: total,
+            orderDate: new Date().toISOString(),
             averagePrice: averagePrice,
+            deliveryDate: deliveryDateTime.toISOString(),
         };
+
+        const { deliveryTime, ...remainingData } = data;
 
         const orderData = {
             userId: Number(user?.id),
             body: {
-                ...data,
+                ...remainingData,
                 ...additionalFields
             },
             token: session?.data?.user?.access_token
@@ -135,7 +193,7 @@ const OrderForm = () => {
                         <p>Cash on Delivery</p>
                     </CardContent>
                 </Card>
-                <Card>
+                {/* <Card>
                     <CardContent
                         className={`bg-white rounded-lg p-10 flex gap-4 cursor-pointer transition ${selectedPayment === 'esewa' ? 'border-2 border-yellow-300' : ''}`}
                         onClick={() => handleSelect('esewa')}
@@ -143,9 +201,63 @@ const OrderForm = () => {
                         <Banknote />
                         <p>Esewa Payment</p>
                     </CardContent>
-                </Card>
+                </Card> */}
             </div>
+            <div className="w-full flex flex-col gap-y-4">
+                <div className="flex items-center gap-x-2">
+                    <InputBox<TOrder>
+                        name="deliveryDate"
+                        id="asap"
+                        placeholder="As soon as possible..."
+                        register={register}
+                        error={(errors && errors?.deliveryDate?.message?.toString()) || ""}
+                        className="w-6 h-6"
+                        type="radio"
+                        onChange={() => setIsScheduleDelivery(false)}
+                    />
+                    <Label id="orderDate" className="">As soon as possible</Label>
+                </div>
+                <div className="flex items-center gap-x-2 ">
+                    <InputBox<TOrder>
+                        name="deliveryDate"
+                        id="schedule"
+                        placeholder="Schedule Delivery Date..."
+                        register={register}
+                        error={(errors && errors?.deliveryDate?.message?.toString()) || ""}
+                        className="w-6 h-6"
+                        type="radio"
+                        onChange={() => setIsScheduleDelivery(true)}
+                    />
+                    <Label className=" ">Schedule delivery for later</Label>
+                </div>
 
+                {isScheduleDelivery && (
+                    <div className="mt-4">
+                        <Label className="text-lg font-medium text-gray-900">Select Delivery Date and Time</Label>
+                        <div className="flex  gap-x-16 mt-4 opacity-90">
+                            <SelectBox<TOrder>
+                                name="deliveryDate"
+                                control={control}
+                                map={dateOptions}
+                                placeholder="Select Delivery Date"
+                                label="Date"
+                                error={(errors && errors?.deliveryDate?.message) || ""}
+                            />
+
+                            {/* Time picker restricted between 8 AM and 8 PM */}
+                            <SelectBox<TOrder>
+                                name="deliveryTime"
+                                control={control}
+                                map={timeOptions}
+                                placeholder="Select Delivery Time"
+                                label="Time"
+                                error={(errors && errors?.deliveryDate?.message) || ""}
+
+                            />
+                        </div>
+                    </div>
+                )}
+            </div>
             <Button className="text-base w-[200px] text-white bg-primary hover:bg-primary/80 mt-10">
                 {isPending ? (
                     <div className="flex items-center gap-2">

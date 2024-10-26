@@ -11,6 +11,7 @@ export const OrderSchema = z.object({
   orderStatus: z.string().optional(),
   paymentStatus: z.string().optional(),
   deliveryDate: z.string().optional(),
+  deliveryTime: z.string().optional(),
   specialInstructions: z.string().optional(),
   cancellationReason: z.string().optional(),
 });

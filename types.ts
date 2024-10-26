@@ -46,7 +46,7 @@ type Order = {
   transactionId: number;
   partnerId: number;
   orderDetails: [OrderDetails];
-  orderDate: Date;
+  orderDate?: Date;
   deliveryAddress: string;
   totalPrice: number;
   averagePrice: number;
@@ -55,6 +55,7 @@ type Order = {
   specialInstructions: string;
   cancellationReason: string;
   deliveryDate: string;
+  deliveryTime: string;
   notes: string;
 };
 
